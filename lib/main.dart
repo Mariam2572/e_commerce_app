@@ -2,7 +2,7 @@ import 'package:e_commerce_app/ui/auth/login/login_screen.dart';
 import 'package:e_commerce_app/ui/auth/register/register_screen.dart';
 import 'package:e_commerce_app/ui/splash_screen.dart';
 import 'package:e_commerce_app/ui/utils/app_theme.dart';
-import 'package:e_commerce_app/ui/utils/my_theme.dart';
+import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,7 +26,7 @@ class E_commerceApp extends StatelessWidget {
             LoginScreen.routeName :(context) => LoginScreen(),
             RegisterScreen.routeName :(context) => RegisterScreen(),
           },
-        //  theme: AppTheme.mainThem,
+          theme: AppTheme.mainThem,
         );
       },
     );

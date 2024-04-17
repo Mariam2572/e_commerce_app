@@ -1,63 +1,48 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:e_commerce_app/ui/utils/my_theme.dart';
+import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
-//typedef myValidator = String? Function(String?);
 class CustomTextFormField extends StatelessWidget {
-String label;
-TextEditingController controller;
-TextInputType keyboardType;
-bool obscureText;
-String? Function(String?) validator;
+  String hintText;
+  TextEditingController controller;
+  TextInputType keyboardType;
+  bool obscureText;
+  String? Function(String?) validator;
   CustomTextFormField({
-required this.validator,
-required this.label,
-required this.controller,
-this.obscureText = false,
-this.keyboardType = TextInputType.text,
-  }) ;
+    required this.validator,
+    required this.hintText,
+    required this.controller,
+    this.obscureText = false,
+    this.keyboardType = TextInputType.text,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
-      
       padding: const EdgeInsets.all(15.0),
       child: TextFormField(
-        obscureText:obscureText ,
-        validator:validator ,
-        keyboardType:keyboardType ,
-        controller:controller ,
-    decoration: InputDecoration(
-      label: Text(label),
-      labelStyle: TextStyle(
-      //  color: MyTheme.greyColor,
-        
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(
-          width: 1,
-         color: AppColors.whiteColor
-        )
-
-      ),focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15)
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-         borderSide: BorderSide(
-          width: 1,
-          //color: MyTheme.redColor
-        ) ,),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-         borderSide: BorderSide(
-          width: 1,
-         // color: MyTheme.redColor
+        style: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
+        obscureText: obscureText,
+        validator: validator,
+        keyboardType: keyboardType,
+        controller: controller,
+        decoration: InputDecoration(
+          fillColor: AppColors.whiteColor,
+          filled: true,
+          focusColor: AppColors.whiteColor,
+          hintText: hintText,
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide:
+                  const BorderSide(width: 1, color: AppColors.whiteColor)),
+          focusedBorder:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
         ),
-
-      )
-      
-    ) ,
       ),
     );
   }
