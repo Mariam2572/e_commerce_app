@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:e_commerce_app/data/model/response/Errors.dart';
 import 'package:e_commerce_app/data/model/response/user_dto.dart';

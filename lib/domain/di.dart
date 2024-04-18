@@ -1,8 +1,8 @@
 import 'package:e_commerce_app/data/api/api_manager.dart';
-import 'package:e_commerce_app/data/rebository/data_source/auth_remote_data_source_impl.dart';
-import 'package:e_commerce_app/data/rebository/rebository/auth_rebository_impl.dart';
-import 'package:e_commerce_app/domain/rebository/data_source/auth_remote_data_source.dart';
-import 'package:e_commerce_app/domain/rebository/rebository/auth_repository.dart';
+import 'package:e_commerce_app/data/repository/data_source/auth_remote_data_source_impl.dart';
+import 'package:e_commerce_app/data/repository/rebository/auth_rebository_impl.dart';
+import 'package:e_commerce_app/domain/repository/data_source/auth_remote_data_source.dart';
+import 'package:e_commerce_app/domain/repository/repository/auth_repository.dart';
 import 'package:e_commerce_app/domain/use_cases/login_use_case.dart';
 import 'package:e_commerce_app/domain/use_cases/register_use_case.dart';
 

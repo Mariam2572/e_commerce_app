@@ -3,8 +3,8 @@ import 'package:dartz/dartz.dart';
 
 import 'package:e_commerce_app/data/api/api_manager.dart';
 import 'package:e_commerce_app/domain/entities/auth_result_entity.dart';
-import 'package:e_commerce_app/domain/entities/faliurs.dart';
-import 'package:e_commerce_app/domain/rebository/data_source/auth_remote_data_source.dart';
+import 'package:e_commerce_app/domain/entities/failures.dart';
+import 'package:e_commerce_app/domain/repository/data_source/auth_remote_data_source.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   ApiManager apiManager ;

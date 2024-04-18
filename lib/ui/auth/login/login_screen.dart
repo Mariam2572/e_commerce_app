@@ -76,13 +76,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller:cubit. e_mailController,
                         validator: (text) {
                           if (text == null || text.trim().isEmpty) {
-                            return 'validate_mail';
+                            return 'please enter valid email';
                           }
                           bool emailValid = RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(cubit.e_mailController.text);
                           if (!emailValid) {
-                            return 'validate_mail_text';
+                            return 'please enter valid email';
                           }
                           return null;
                         }),
@@ -90,14 +90,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     CustomTextFormField(
                         hintText: 'Enter your password',
-                        obscureText: true,
+                        obscureText: cubit.isObscure,
+                        suffixIcon: InkWell(
+                          child: cubit.isObscure ? Icon(Icons.visibility_off)
+                          :Icon(Icons.visibility),
+                          onTap: () {
+                            if (cubit.isObscure) {
+                              cubit.isObscure =false;
+                            } else {
+                              cubit.isObscure =true;
+                            }
+                            setState(() {
+                              
+                            });
+                          },
+                          
+                        ),
+                        
                         controller:cubit. passwordController,
                         validator: (text) {
                           if (text == null || text.trim().isEmpty) {
-                            return 'validate_password';
+                            return 'please enter your password';
                           }
                           if (text.length < 6) {
-                            return ' password_length';
+                            return 'Incorrect password';
                           }
                           return null;
                         }),

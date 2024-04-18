@@ -2,9 +2,9 @@
 import 'package:dartz/dartz.dart';
 
 import 'package:e_commerce_app/domain/entities/auth_result_entity.dart';
-import 'package:e_commerce_app/domain/entities/faliurs.dart';
-import 'package:e_commerce_app/domain/rebository/data_source/auth_remote_data_source.dart';
-import 'package:e_commerce_app/domain/rebository/rebository/auth_repository.dart';
+import 'package:e_commerce_app/domain/entities/failures.dart';
+import 'package:e_commerce_app/domain/repository/data_source/auth_remote_data_source.dart';
+import 'package:e_commerce_app/domain/repository/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepositoryContract {
   AuthRemoteDataSource remoteDataSource;

@@ -62,49 +62,78 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     CustomText(text: 'Full Name'),
                     CustomTextFormField(
-                      hintText: ' user_name',
+                      hintText: ' Enter your name',
                       controller: cubit.nameController,
                       validator: (text) {
                         if (text == null || text.trim().isEmpty) {
-                          return ' validate_user_name';
+                          return 'please enter your name';
                         }
                         return null;
                       },
                     ),
                     CustomText(text: 'E-mail Address'),
                     CustomTextFormField(
-                        hintText: 'e_mail',
+                        hintText: 'Enter your email',
                         keyboardType: TextInputType.emailAddress,
                         controller: cubit.emailController,
                         validator: (text) {
                           if (text == null || text.trim().isEmpty) {
-                            return 'validate_mail';
+                            return 'please enter valid email';
                           }
                           bool emailValid = RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                               .hasMatch(cubit.emailController.text);
                           if (!emailValid) {
-                            return 'validate_mail_text';
+                            return 'please enter valid email';
                           }
                           return null;
                         }),
-                    CustomText(text: 'Password'),
+                    CustomText(text: 'Enter your Password'),
                     CustomTextFormField(
-                        obscureText: true,
+                        obscureText: cubit.isObscure,
+                        suffixIcon: InkWell(
+                          child: cubit.isObscure ? Icon(Icons.visibility_off) :
+                          Icon(Icons.visibility)
+                          ,
+                          onTap: () {
+                            if (cubit.isObscure) {
+                              cubit.isObscure = false;
+                            } else {
+                              cubit.isObscure = true;
+                            }
+                            setState(() {
+                              
+                            });
+                          },
+                        ),
                         hintText: 'password',
                         controller: cubit.passwordController,
                         validator: (text) {
                           if (text == null || text.trim().isEmpty) {
-                            return 'validate_password';
+                            return 'please enter password';
                           }
                           if (text.length < 6) {
-                            return 'password_length';
+                            return 'password length should be < 6';
                           }
                           return null;
                         }),
                     CustomText(text: 'Confirm Password'),
                     CustomTextFormField(
-                        obscureText: true,
+                        obscureText: cubit.isObscure,
+                          suffixIcon: InkWell(
+                          child: cubit.isObscure ? Icon(Icons.visibility_off)
+                          :Icon(Icons.visibility),
+                          onTap: () {
+                            if (cubit.isObscure) {
+                              cubit.isObscure =false;
+                            } else {
+                              cubit.isObscure =true;
+                            }
+                            setState(() {
+                              
+                            });
+                          },
+                        ),
                         hintText: 'confirm password',
                         controller: cubit.rePasswordController,
                         validator: (text) {
@@ -112,7 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return 'confirm password';
                           }
                           if (text != cubit.passwordController.text) {
-                            return 'password match';
+                            return "password doesn't match";
                           }
                           return null;
                         }),
