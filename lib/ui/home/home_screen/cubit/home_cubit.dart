@@ -12,7 +12,7 @@ class HomeCubit extends Cubit<HomeStates> {
   int selectedIndex = 0;
     List<Widget> tabs = [
       HomeTab( ),
-      const ProductListTab(),
+       ProductListTab(),
       const FavoriteTab(),
       const ProfileTab(),
     ];
