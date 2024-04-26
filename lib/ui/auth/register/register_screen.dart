@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/domain/di.dart';
 import 'package:e_commerce_app/ui/auth/register/cubit/register_cubit.dart';
 import 'package:e_commerce_app/ui/auth/register/cubit/states.dart';
+import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
 import 'package:e_commerce_app/ui/utils/custom_button.dart';
 import 'package:e_commerce_app/ui/utils/custom_text_field.dart';
 import 'package:e_commerce_app/ui/utils/dialog_utils.dart';
@@ -36,7 +37,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           DialogUtils.showMessage(
               context: context,
               message: state.authResultEntity.userEntity?.name ?? '',
-              title: 'Success'
+              title: 'Success',
+                posActionName: 'Ok',
+            posAction: () {
+              Navigator.pushReplacementNamed(context, HomeScreen.routName);
+            },
               );
         }
       },

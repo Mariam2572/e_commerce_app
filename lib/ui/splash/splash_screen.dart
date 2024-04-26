@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:e_commerce_app/ui/auth/login/login_screen.dart';
+import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -10,7 +10,11 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 1), () { 
-      Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+      Navigator.pushReplacementNamed(context, 
+      //LoginScreen.routeName
+      HomeScreen.routName
+      
+      );
     });
     return Scaffold(
       body: Image.asset('assets/images/Group 23.png',

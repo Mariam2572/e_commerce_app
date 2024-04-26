@@ -11,10 +11,11 @@ class RegisterResponseDto {
   String? statusMsg;
   Errors ? errors ;
   RegisterResponseDto({
-    this.message,
     this.user,
     this.token,
     this.statusMsg,
+        this.message,
+
     required this.errors,
   });
 

@@ -6,12 +6,14 @@ class CustomTextFormField extends StatelessWidget {
   TextEditingController controller;
   TextInputType keyboardType;
   bool obscureText;
+  Widget? suffixIcon;
   String? Function(String?) validator;
   CustomTextFormField({
     required this.validator,
     required this.hintText,
     required this.controller,
     this.obscureText = false,
+    this.suffixIcon,
     this.keyboardType = TextInputType.text,
   });
   @override
@@ -26,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
         keyboardType: keyboardType,
         controller: controller,
         decoration: InputDecoration(
+          suffixIcon:suffixIcon,
           fillColor: AppColors.whiteColor,
           filled: true,
           focusColor: AppColors.whiteColor,

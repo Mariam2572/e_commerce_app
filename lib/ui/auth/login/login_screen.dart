@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/domain/di.dart';
 import 'package:e_commerce_app/ui/auth/login/cubit/login_cubit.dart';
 import 'package:e_commerce_app/ui/auth/register/register_screen.dart';
+import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
 import 'package:e_commerce_app/ui/utils/custom_button.dart';
 import 'package:e_commerce_app/ui/utils/custom_text_field.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
@@ -33,10 +34,14 @@ class _LoginScreenState extends State<LoginScreen> {
         } else if (state is LoginSuccessState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(
-              context: context,
-              message: state.authResultEntity.userEntity?.name ?? '',
-              title: 'Success'
-              );
+            context: context,
+            message: state.authResultEntity.userEntity?.name ?? '',
+            title: 'Success',
+            posActionName: 'Ok',
+            posAction: () {
+              Navigator.pushReplacementNamed(context, HomeScreen.routName);
+            },
+          );
         }
     },
     child: Scaffold(

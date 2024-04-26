@@ -4,15 +4,14 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/data/api/api_constant.dart';
 import 'package:e_commerce_app/data/model/request/login_request.dart';
 import 'package:e_commerce_app/data/model/request/register_request.dart';
+import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/register_response_dto.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
 import 'package:http/http.dart' as http;
-
 /*
 https://ecommerce.routemisr.com/api/v1/auth/signup 
  */
-
 class ApiManager {
   ApiManager._();
   static ApiManager? _instance;
@@ -20,7 +19,6 @@ class ApiManager {
     _instance ??= ApiManager._();
     return _instance!;
   }
-
   Future<Either<Failures, RegisterResponseDto>> register(String name,
       String email, String password, String rePassword, String phone) async {
     var connectivityResult =
@@ -71,6 +69,46 @@ class ApiManager {
       }
     } else {
       return Left(
+          NetWorkError(errorMessage: 'Please Check Internet Connection'));
+    }
+  }
+
+  Future<Either<Failures, CategoryOrBrandsResponseDto>> getAllCategories() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      Uri url = Uri.https(ApiConstant.baseUrl, ApiEndpoint.categoriesEndPoint);
+      var response = await http.get(url);
+      var categoryResponse =
+          CategoryOrBrandsResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(categoryResponse);
+      } else {
+        return Left(ServerError(errorMessage: categoryResponse.message!));
+      }
+    } else {
+      // No internet connection
+      return left(
+          NetWorkError(errorMessage: 'Please Check Internet Connection'));
+    }
+  }
+
+  Future<Either<Failures, CategoryOrBrandsResponseDto>> getAllBrands() async { 
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      Uri url = Uri.https(ApiConstant.baseUrl, ApiEndpoint.brandsEndPoint);
+      var response = await http.get(url);
+      var brandsResponse =
+          CategoryOrBrandsResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(brandsResponse);
+      } else {
+        return Left(ServerError(errorMessage: brandsResponse.message!));
+      }
+    } else {
+      // No internet connection
+      return left(
           NetWorkError(errorMessage: 'Please Check Internet Connection'));
     }
   }
