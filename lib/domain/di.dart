@@ -31,14 +31,24 @@ AuthRemoteDataSource injectAuthRemoteDataSource() {
 LoginUseCase injectLoginUseCase() {
   return LoginUseCase(repositoryContract: injectAuthRepository());
 }
-GetAllCategoriesUseCase injectAllCategories(){
+
+GetAllCategoriesUseCase injectAllCategories() {
   return GetAllCategoriesUseCase(homeTabRepositoryContract: injectToHomeTab());
-} GetAllBrandsUseCase injectGetAllBrandsUseCase(){
-  return GetAllBrandsUseCase(homeTabRepositoryContract: injectToHomeTab());
-} 
-HomeTabRepositoryContract injectToHomeTab(){
-  return HomeTabRepoImpl(homeTabRemoteDataSource: injectToHomeTabRemoteDataSource());
 }
-HomeTabRemoteDataSource  injectToHomeTabRemoteDataSource(){
+
+GetAllBrandsUseCase injectGetAllBrandsUseCase() {
+  return GetAllBrandsUseCase(homeTabRepositoryContract: injectToHomeTab());
+}
+
+GetAllProductUseCase injectGetAllProductUseCase() {
+  return GetAllProductUseCase(homeTabRepositoryContract: injectToHomeTab());
+}
+
+HomeTabRepositoryContract injectToHomeTab() {
+  return HomeTabRepoImpl(
+      homeTabRemoteDataSource: injectToHomeTabRemoteDataSource());
+}
+
+HomeTabRemoteDataSource injectToHomeTabRemoteDataSource() {
   return HomeTabRemoteDataSourceImpl(apiManager: ApiManager.getInstance());
 }

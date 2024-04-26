@@ -4,10 +4,12 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/data/api/api_constant.dart';
 import 'package:e_commerce_app/data/model/request/login_request.dart';
 import 'package:e_commerce_app/data/model/request/register_request.dart';
+import 'package:e_commerce_app/data/model/response/ProductResponseDto.dart';
 import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/register_response_dto.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
+import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:http/http.dart' as http;
 /*
 https://ecommerce.routemisr.com/api/v1/auth/signup 
@@ -105,6 +107,25 @@ class ApiManager {
         return Right(brandsResponse);
       } else {
         return Left(ServerError(errorMessage: brandsResponse.message!));
+      }
+    } else {
+      // No internet connection
+      return left(
+          NetWorkError(errorMessage: 'Please Check Internet Connection'));
+    }
+  }
+ Future<Either<Failures, ProductResponseDto>> getAllProducts() async { 
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      Uri url = Uri.https(ApiConstant.baseUrl, ApiEndpoint.productsEndPoint);
+      var response = await http.get(url);
+      var productResponse =
+          ProductResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(productResponse);
+      } else {
+        return Left(ServerError(errorMessage: productResponse.message!));
       }
     } else {
       // No internet connection
