@@ -4,11 +4,13 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/data/api/api_constant.dart';
 import 'package:e_commerce_app/data/model/request/login_request.dart';
 import 'package:e_commerce_app/data/model/request/register_request.dart';
+import 'package:e_commerce_app/data/model/response/ProductResponseDto.dart';
 import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/product_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/register_response_dto.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
+import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:http/http.dart' as http;
 /*
 https://ecommerce.routemisr.com/api/v1/auth/signup 
