@@ -7,22 +7,23 @@ import 'package:e_commerce_app/data/model/request/register_request.dart';
 import 'package:e_commerce_app/data/model/response/ProductResponseDto.dart';
 import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
-import 'package:e_commerce_app/data/model/response/product_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/register_response_dto.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
-import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:http/http.dart' as http;
+
 /*
 https://ecommerce.routemisr.com/api/v1/auth/signup 
  */
+
 class ApiManager {
+  // singleton
   ApiManager._();
   static ApiManager? _instance;
   static ApiManager getInstance() {
     _instance ??= ApiManager._();
     return _instance!;
   }
-  Future<Either<Failures, RegisterResponseDto>> register(String name,
+  Future<Either<Failures, RegisterResponseDto>>register(String name,
       String email, String password, String rePassword, String phone) async {
     var connectivityResult =
         await Connectivity().checkConnectivity(); // User defined class
@@ -55,7 +56,7 @@ class ApiManager {
     }
   }
 
-  Future<Either<Failures, LoginResponseDto>> login(
+  Future<Either<Failures, LoginResponseDto>>login(
       String email, String password) async {
     var connectivityResult =
         await Connectivity().checkConnectivity(); // User defined class
@@ -76,7 +77,7 @@ class ApiManager {
     }
   }
 
-  Future<Either<Failures, CategoryOrBrandsResponseDto>> getAllCategories() async {
+  Future<Either<Failures, CategoryOrBrandsResponseDto>>getAllCategories() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
@@ -96,7 +97,7 @@ class ApiManager {
     }
   }
 
-  Future<Either<Failures, CategoryOrBrandsResponseDto>> getAllBrands() async { 
+  Future<Either<Failures, CategoryOrBrandsResponseDto>>getAllBrands() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
@@ -115,7 +116,8 @@ class ApiManager {
           NetWorkError(errorMessage: 'Please Check Internet Connection'));
     }
   }
- Future<Either<Failures, ProductResponseDto>> getAllProducts() async { 
+
+  Future<Either<Failures, ProductResponseDto>>getAllProducts() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {

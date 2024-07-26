@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/ui/auth/login/login_screen.dart';
 import 'package:e_commerce_app/ui/auth/register/register_screen.dart';
+import 'package:e_commerce_app/ui/home/card/card_screen.dart';
 import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
+import 'package:e_commerce_app/ui/home/product_details/product_details.dart';
 import 'package:e_commerce_app/ui/splash/splash_screen.dart';
 import 'package:e_commerce_app/ui/utils/app_theme.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
@@ -23,10 +25,12 @@ class E_commerceApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: SplashScreen.routeName,
           routes: {
-            SplashScreen.routeName:(context) => SplashScreen(),
+            SplashScreen.routeName:(context) => const SplashScreen(),
             LoginScreen.routeName :(context) => LoginScreen(),
-            RegisterScreen.routeName :(context) => RegisterScreen(),
+            RegisterScreen.routeName :(context) => const RegisterScreen(),
             HomeScreen.routName :(context) => HomeScreen(),
+            ProductDetails.routeName :(context) => ProductDetails(),
+            CardScreen.routeName :(context) => CardScreen(),
           },
           theme: AppTheme.mainThem,
         );

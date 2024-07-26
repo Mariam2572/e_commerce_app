@@ -1,28 +1,20 @@
+import 'package:e_commerce_app/ui/home/card/widgets/card_item.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/total_price_widget.dart';
-import 'package:e_commerce_app/ui/home/tabs/favorite_tab/widget/fav_widget.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
-import 'package:e_commerce_app/ui/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FavoriteTab extends StatelessWidget {
-  const FavoriteTab({super.key});
+class CardScreen extends StatelessWidget {
+  static const String routeName = '/card_screen';
+  const CardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Colors.transparent,
-        foregroundColor: AppColors.mainColor,
-        backgroundColor: Colors.transparent,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(AppImages.iconShopping),
-          )
-        ],
         centerTitle: true,
-        title:  Text('Favorite',
+        iconTheme: const IconThemeData(color: AppColors.mainColor),
+        title:  Text('Card',
         
         style: Theme.of(context).textTheme.titleLarge,),
         ),
@@ -31,7 +23,7 @@ class FavoriteTab extends StatelessWidget {
           children: [
             Expanded(child: 
             ListView.builder(itemBuilder: (context, index) {
-           return FavoriteWidget(); 
+           return  CardItem(); 
             },
             itemCount: 10,
             )),
@@ -43,5 +35,6 @@ class FavoriteTab extends StatelessWidget {
           ],
         ),
       );
+    
   }
 }

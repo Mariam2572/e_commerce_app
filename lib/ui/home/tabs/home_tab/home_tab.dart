@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/domain/di.dart';
+import 'package:e_commerce_app/ui/home/card/card_screen.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/cubit/home_tab_cubit.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/widget/category.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/widget/search_field.dart';
@@ -40,7 +41,11 @@ class HomeTab extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const SearchField(),
-                      Image.asset(AppImages.iconShopping),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(CardScreen.routeName);
+                        },
+                        child: Image.asset(AppImages.iconShopping)),
                     ],
                   ),
                   SliderImages(),

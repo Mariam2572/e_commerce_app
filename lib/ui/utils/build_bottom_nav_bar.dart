@@ -22,6 +22,7 @@ class BuildBottomNavBar extends StatelessWidget {
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30.r), topRight: Radius.circular(30.r)),
       child: BottomNavigationBar(
+       
           backgroundColor: AppColors.mainColor,
           type: BottomNavigationBarType.fixed,
           onTap: onTabFunction,
@@ -62,7 +63,7 @@ class BuildBottomNavBar extends StatelessWidget {
                     ? AppColors.whiteColor
                     : Colors.transparent,
                 child: const ImageIcon(
-                  AssetImage(AppImages.favTabUnS),
+                  AssetImage(AppImages.favTabS),
                   size: 30,
                 ),
               ),
