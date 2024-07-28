@@ -11,50 +11,60 @@ import '../../../utils/app_images.dart';
 import '../../card/card_screen.dart';
 
 class ProductListTab extends StatelessWidget {
-  ProductTabCubit cubit =
-      ProductTabCubit(getAllProductUseCase: injectGetAllProductUseCase());
+  ProductTabCubit cubit = ProductTabCubit(
+      getAllProductUseCase: injectGetAllProductUseCase(),
+      addCartUseCase: injectAddCartUseCase());
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductTabCubit, ProductTabState>(
-      bloc: cubit..getAllProducts(),
-      builder: (context, state) {
-        return SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                          child: InkWell(
-                            onTap: () {
-                             Navigator.of(context).pushNamed(CardScreen.routeName);
-
-                            },
-                            child: Image.asset(AppImages.iconShopping,width: 30,)),
+    return BlocProvider<ProductTabCubit>(
+      create: (context) => cubit..getAllProducts(),
+      child: BlocBuilder<ProductTabCubit, ProductTabState>(
+        // bloc: cubit..getAllProducts(),
+        builder: (context, state) {
+          return SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(CardScreen.routeName);
+                      },
+                      child: Badge(
+                        label: Text(cubit.numOfCartItem.toString(),),
+                        child: Image.asset(
+                          AppImages.iconShopping,
+                          width: 30,
                         ),
-              SizedBox(height: 10.h),
-              Expanded(
-                child: GridView.builder(
-                    itemCount: cubit.productList.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 2 / 2.7,
-                      crossAxisSpacing: 16.w,
-                    ),
-                    itemBuilder: (context, index) {
-                      return state is ProductTabLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(
-                              color: AppColors.mainColor,
-                            ))
-                          : ProductItem(
-                              productList: cubit.productList[index],
-                            );
-                    }),
-              ),
-            ],
-          ),
-        );
-      },
+                      )),
+                ),
+                SizedBox(height: 10.h),
+                Expanded(
+                  child: GridView.builder(
+                      itemCount: cubit.productList.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 2 / 2.7,
+                        crossAxisSpacing: 16.w,
+                      ),
+                      itemBuilder: (context, index) {
+                        return state is ProductTabLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                color: AppColors.mainColor,
+                              ))
+                            : ProductItem(
+                                productEntity: cubit.productList[index],
+                              );
+                      }),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -1,18 +1,18 @@
 import 'package:e_commerce_app/ui/home/product_details/widgets/total_price_widget.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:e_commerce_app/ui/utils/app_images.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddTOCardWidget extends StatelessWidget {
-  const AddTOCardWidget({super.key});
+class AddTOCartWidget extends StatelessWidget {
+  String totalPrice;
+   AddTOCartWidget({super.key , required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      const TotalPriceWidget(),
+       TotalPriceWidget(totalPrice: totalPrice,),
       GestureDetector(
         onTap: () {},
         child: Container(

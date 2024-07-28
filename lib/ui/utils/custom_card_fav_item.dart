@@ -52,7 +52,9 @@ class CustomCardAndFavItem extends StatelessWidget {
                   iconFavOrDel
                 ],
               ),
-              
+              SizedBox(
+                height: 10.h,
+              )  ,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

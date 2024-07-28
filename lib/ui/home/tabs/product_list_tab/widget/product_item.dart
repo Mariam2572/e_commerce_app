@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_commerce_app/ui/home/product_details/product_details.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/rating_widget.dart';
+import 'package:e_commerce_app/ui/home/tabs/product_list_tab/cubit/product_tab_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,11 +13,11 @@ import 'package:e_commerce_app/ui/utils/app_images.dart';
 import '../../../../utils/app_color.dart';
 
 class ProductItem extends StatefulWidget {
-  ProductEntity productList;
+  ProductEntity productEntity;
 
   ProductItem({
     Key? key,
-    required this.productList,
+    required this.productEntity,
   }) : super(key: key);
 
   @override
@@ -56,9 +57,10 @@ class _ProductItemState extends State<ProductItem> {
                       onTap: () => Navigator.pushNamed(
                         context,
                         ProductDetails.routeName,
+                        arguments: widget.productEntity,
                       ),
                       child: Image.network(
-                        widget.productList.imageCover ?? '',
+                        widget.productEntity.imageCover ?? '',
                         fit: BoxFit.fill,
                         width: 191.w,
                         height: 128.h,
@@ -95,7 +97,7 @@ class _ProductItemState extends State<ProductItem> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                widget.productList.title ?? '',
+                widget.productEntity.title ?? '',
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
@@ -106,7 +108,7 @@ class _ProductItemState extends State<ProductItem> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                "EGP ${widget.productList.price.toString()}",
+                "EGP ${widget.productEntity.price.toString()}",
                 style: Theme.of(context).textTheme.titleSmall,
                 maxLines: 2,
               ),
@@ -117,10 +119,13 @@ class _ProductItemState extends State<ProductItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RatingWidget(
-                    rating: widget.productList.ratingsAverage.toString(),
+                    rating: widget.productEntity.ratingsAverage.toString(),
                   ),
-                  InkWell(
-                    onTap: () {},
+                  GestureDetector(
+                    onTap: () {
+                      // add to cart
+                      ProductTabCubit.get(context).addToCart(widget.productEntity.id??'');
+                    },
                     child: Image.asset(
                       AppImages.add,
                       height: 25,

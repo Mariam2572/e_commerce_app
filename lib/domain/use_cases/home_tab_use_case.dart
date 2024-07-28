@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
-import 'package:e_commerce_app/domain/repository/repository/home_tab_repository.dart';
+import 'package:e_commerce_app/domain/repository/repository/home_repository.dart';
 import '../entities/categoryorbrandsresponse_entity.dart';
 import '../entities/failures.dart';
 
 class GetAllCategoriesUseCase {
-  HomeTabRepositoryContract homeTabRepositoryContract;
+  HomeRepositoryContract homeTabRepositoryContract;
   GetAllCategoriesUseCase({
     required this.homeTabRepositoryContract,
   });
@@ -14,7 +14,7 @@ class GetAllCategoriesUseCase {
   }
 }
 class GetAllBrandsUseCase {
-  HomeTabRepositoryContract homeTabRepositoryContract;
+  HomeRepositoryContract homeTabRepositoryContract;
   GetAllBrandsUseCase({
     required this.homeTabRepositoryContract,
   });
@@ -23,7 +23,7 @@ class GetAllBrandsUseCase {
   } }
 
   class GetAllProductUseCase {
-  HomeTabRepositoryContract homeTabRepositoryContract;
+  HomeRepositoryContract homeTabRepositoryContract;
   GetAllProductUseCase({
     required this.homeTabRepositoryContract,
   });

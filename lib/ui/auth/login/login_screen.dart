@@ -6,6 +6,7 @@ import 'package:e_commerce_app/ui/utils/custom_button.dart';
 import 'package:e_commerce_app/ui/utils/custom_text_field.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:e_commerce_app/ui/utils/dialog_utils.dart';
+import 'package:e_commerce_app/ui/utils/shared_pref.dart';
 import 'package:e_commerce_app/ui/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,9 +37,12 @@ class _LoginScreenState extends State<LoginScreen> {
           DialogUtils.showMessage(
             context: context,
             message: state.authResultEntity.userEntity?.name ?? '',
+            
             title: 'Success',
             posActionName: 'Ok',
             posAction: () {
+              //save data
+              SharedPreference.setData('token', state.authResultEntity.token);
               Navigator.pushReplacementNamed(context, HomeScreen.routName);
             },
           );

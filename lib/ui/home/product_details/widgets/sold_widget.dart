@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SoldWidget extends StatelessWidget {
-  const SoldWidget({super.key});
+  String sold;
+   SoldWidget({super.key
+   , required this.sold
+   });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class SoldWidget extends StatelessWidget {
                     width: 1.w
                   )
                 ),
-                child: Text('Sold',style: Theme.of(context).textTheme.titleSmall),
+                child: Text('Sold : $sold',style: Theme.of(context).textTheme.titleSmall),
               )
              ;
   }

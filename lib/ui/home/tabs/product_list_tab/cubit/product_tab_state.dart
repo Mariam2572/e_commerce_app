@@ -12,4 +12,16 @@ final class ProductTabError extends ProductTabState {
 final class ProductTabSuccess extends ProductTabState {
 ProductResponseEntity productResponseEntity;
 ProductTabSuccess({required this.productResponseEntity});
+
+}
+
+final class AddToCartLoading extends ProductTabState {}
+final class AddToCartError extends ProductTabState {
+  Failures ? errorMessage;
+  AddToCartError({this.errorMessage});
+}
+final class AddToCartSuccess extends ProductTabState {
+AddCartResponseEntity addCartResponseEntity;
+AddToCartSuccess({required this.addCartResponseEntity});
+
 }

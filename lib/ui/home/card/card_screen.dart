@@ -30,7 +30,7 @@ class CardScreen extends StatelessWidget {
             
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 30.h),
-              child: TotalPriceWidget(),
+              child: TotalPriceWidget(totalPrice: '1000',),
             )
           ],
         ),

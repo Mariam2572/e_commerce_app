@@ -1,3 +1,5 @@
+
+import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:e_commerce_app/ui/home/card/card_screen.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/add_to_card.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/product_count.dart';
@@ -9,17 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
 import '../../utils/app_images.dart';
 import 'widgets/rating_widget.dart';
 
 class ProductDetails extends StatelessWidget {
   static const String routeName = '/product_details';
-  const ProductDetails({super.key});
+  
+   ProductDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
+var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -69,15 +71,13 @@ class ProductDetails extends StatelessWidget {
                     indicatorBackgroundColor: AppColors.whiteColor,
                     indicatorBottomPadding: 20.h,
                     autoPlayInterval: 3000,
-                    children: [
-                      Image.asset(
-                        AppImages.slider1,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: 300.h,
-                      ),
-                    ]),
-              ),
+                    children: args.images!.map((url) => Image.network(url,
+                        fit: BoxFit.fill,
+                    
+                    )
+                    ).toList()),
+                    ),
+              
               SizedBox(
                 height: 40.h,
               ),
@@ -85,12 +85,12 @@ class ProductDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Product Name',
+                    args.title??'',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: AppColors.darkBlue, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    'EGP price',
+                    'EGP ${args.price}',
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall
@@ -104,8 +104,8 @@ class ProductDetails extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SoldWidget(),
-                   RatingWidget(rating: 'Rating',),
+                   SoldWidget(sold: args.sold.toString(),),
+                   RatingWidget(rating: args.ratingsAverage.toString(),),
                   SizedBox(
                     width: 10.w,
                   ),
@@ -125,9 +125,9 @@ class ProductDetails extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-           ReadMoreWidget(),
+           ReadMoreWidget(text: args.description??'',),
           SizedBox(height: 150.h,),
-          AddTOCardWidget()
+          AddTOCartWidget(totalPrice: args.price.toString(),)
             ],
           ),
         ),

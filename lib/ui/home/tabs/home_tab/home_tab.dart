@@ -3,6 +3,7 @@ import 'package:e_commerce_app/ui/home/card/card_screen.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/cubit/home_tab_cubit.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/widget/category.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/widget/search_field.dart';
+import 'package:e_commerce_app/ui/home/tabs/product_list_tab/cubit/product_tab_cubit.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:e_commerce_app/ui/utils/app_images.dart';
 import 'package:flutter/cupertino.dart';

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TotalPriceWidget extends StatelessWidget {
-  const TotalPriceWidget({super.key});
+  String totalPrice;
+   TotalPriceWidget({super.key, required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class TotalPriceWidget extends StatelessWidget {
         SizedBox(
           height: 10.h,
         ),
-        Text('Egp price', style: Theme.of(context).textTheme.
+        Text('Egp ${totalPrice}', style: Theme.of(context).textTheme.
         titleSmall),
       ]);
   }
