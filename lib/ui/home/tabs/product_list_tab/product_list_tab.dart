@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/app_images.dart';
-import '../../card/card_screen.dart';
+import '../../cart/card_screen.dart';
 
 class ProductListTab extends StatelessWidget {
   ProductTabCubit cubit = ProductTabCubit(

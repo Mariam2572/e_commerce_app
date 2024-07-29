@@ -7,6 +7,7 @@ import 'package:e_commerce_app/data/model/request/register_request.dart';
 import 'package:e_commerce_app/data/model/response/ProductResponseDto.dart';
 import 'package:e_commerce_app/data/model/response/add_cart_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.dart';
+import 'package:e_commerce_app/data/model/response/get_cart_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/register_response_dto.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
@@ -161,6 +162,29 @@ class ApiManager {
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));
     }
 
+} 
+Future<Either<Failures,GetCartResponseDto >> getCart() async {
+  var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+        Uri url =Uri.https(ApiConstant.baseUrl,ApiEndpoint.addToCartEndPoint);
+        var token = SharedPreference.getData(key: 'token');
+     var response = await   http.get(url,headers: {
+          'token': token.toString()
+        });
+       var getCartResponse= GetCartResponseDto.fromJson(jsonDecode(response.body));
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          return Right(getCartResponse);
+          
+        } else if (response.statusCode == 401) {
+        return Left(ServerError(errorMessage: getCartResponse.message!));
+      } else {
+        return Left(ServerError(errorMessage: getCartResponse.message!));
+      }
+    } else {
+      return Left(NetWorkError(errorMessage: 'No Internet Connection'));
+    }
+
+        }
 }
 
-}

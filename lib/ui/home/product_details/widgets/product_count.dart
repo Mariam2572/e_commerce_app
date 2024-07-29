@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/app_color.dart';
 
 class ProductCount extends StatelessWidget {
-  const ProductCount({super.key});
+  String count;
+   ProductCount({super.key , required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class ProductCount extends StatelessWidget {
             ),
           ),
           Text(
-            '1',
+            count,
             style: Theme.of(context).textTheme.titleMedium,),
           IconButton(
             padding: EdgeInsets.zero,

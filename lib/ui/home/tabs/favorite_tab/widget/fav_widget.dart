@@ -11,6 +11,10 @@ class FavoriteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCardAndFavItem(
+      count:'' ,
+      title: '',
+      url: '',
+      price: '',
         iconFavOrDel:
             IconButton(icon: Image.asset(AppImages.favGroup), onPressed: () {}),
         countOrAddToCartIcon: InkWell(

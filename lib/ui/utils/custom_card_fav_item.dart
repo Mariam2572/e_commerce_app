@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,8 +10,16 @@ import 'package:e_commerce_app/ui/utils/app_images.dart';
 class CustomCardAndFavItem extends StatelessWidget {
   Widget iconFavOrDel;
   Widget countOrAddToCartIcon;
+  String url;
+  String title;
+  String count;
+  String price;
   CustomCardAndFavItem({
+    required this.price,
+     required this.url, 
     Key? key,
+    required this.title,
+    required this.count,
     required this.iconFavOrDel,
     required this.countOrAddToCartIcon,
   }) : super(key: key);
@@ -29,8 +38,8 @@ class CustomCardAndFavItem extends StatelessWidget {
       child: Row(children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Image.asset(
-            AppImages.test,
+          child: Image.network(
+            url,
             fit: BoxFit.fill,
           ),
         ),
@@ -45,7 +54,9 @@ class CustomCardAndFavItem extends StatelessWidget {
                   Padding(
                     padding:  EdgeInsets.only(left: 10.w),
                     child: Text(
-                      'Product Name',
+                     title,
+                     overflow: TextOverflow.fade,
+                     maxLines: 1,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
@@ -55,10 +66,14 @@ class CustomCardAndFavItem extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               )  ,
+              Padding(
+                padding:  EdgeInsets.only(left:  10.0.h),
+                child: Text('Count : ${count} ',style: Theme.of(context).textTheme.titleSmall,),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('EGP Price',
+                  Text('EGP ${price}',
                       style: Theme.of(context).textTheme.titleSmall),
                   countOrAddToCartIcon
                 ],

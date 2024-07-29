@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 3), () async {
+    Timer(Duration(seconds:1 ), () async {
       await SharedPreference.init();
       String route;
       var user = SharedPreference.getData(key: 'token');
