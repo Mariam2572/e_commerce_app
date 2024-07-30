@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/domain/entities/add_cart_respose_entity.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
+import 'package:e_commerce_app/domain/entities/wish_list_response_entity.dart';
 import 'package:e_commerce_app/domain/use_cases/add_cart_use_case.dart';
+import 'package:e_commerce_app/domain/use_cases/add_to_wish_list.dart';
 import 'package:e_commerce_app/domain/use_cases/home_tab_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -12,7 +15,9 @@ part 'product_tab_state.dart';
 class ProductTabCubit extends Cubit<ProductTabState> {
 GetAllProductUseCase getAllProductUseCase;
 AddCartUseCase addCartUseCase;
-  ProductTabCubit({required this.getAllProductUseCase ,required this.addCartUseCase})
+  AddToWishListUseCase addToWishListUseCase;
+
+  ProductTabCubit({required this.getAllProductUseCase ,required this.addCartUseCase, required this.addToWishListUseCase})
       : super(ProductTabInitial());
   static ProductTabCubit get(context) => BlocProvider.of(context);
   List<ProductEntity> productList = [];
@@ -36,5 +41,14 @@ AddCartUseCase addCartUseCase;
           print('Num of cart item : ${numOfCartItem}======== ');
           emit(AddToCartSuccess(addCartResponseEntity: response));
         });
+  }
+  addToWishList(String productId) async {
+    emit(AddToWishListLoading());
+    var either = await addToWishListUseCase.invoke(productId);
+    either.fold((l) => Left(emit(AddToWishListError(errorMessage: l))),
+        (response) {
+      emit(AddToWishListSuccess(wishListResponseEntity: response));
+      print("=======================Added Successfully $response");
+    });
   }
 }

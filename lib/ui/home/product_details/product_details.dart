@@ -1,4 +1,3 @@
-
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:e_commerce_app/ui/home/cart/card_screen.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/add_to_card.dart';
@@ -109,7 +108,12 @@ var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
                   SizedBox(
                     width: 10.w,
                   ),
-                   ProductCount(count: '1'),
+                   ProductCount(
+                    addOnPressed: () {
+                   
+                    },
+                    minusOnPressed: () {},
+                    count: '1',),
                 ],
               ),
               SizedBox(

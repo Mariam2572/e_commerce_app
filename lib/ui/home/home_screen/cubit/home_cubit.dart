@@ -13,7 +13,7 @@ class HomeCubit extends Cubit<HomeStates> {
     List<Widget> tabs = [
       HomeTab( ),
        ProductListTab(),
-      const FavoriteTab(),
+       FavoriteTab(),
       const ProfileTab(),
     ];
     changBottomNavBar(int newIndex){

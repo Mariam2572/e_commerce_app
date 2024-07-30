@@ -32,7 +32,7 @@ class _ProductItemState extends State<ProductItem> {
     return Container(
       width: 191.w,
       height: 300.h,
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
           color: AppColors.whiteColor,
@@ -79,7 +79,10 @@ class _ProductItemState extends State<ProductItem> {
                       padding: EdgeInsets.zero,
                       onPressed: () {
                         isFavorite = !isFavorite;
-                        setState(() {});
+                        setState(() {
+                          ProductTabCubit.get(context)
+                              .addToWishList(widget.productEntity.id ?? '');
+                        });
                       },
                       icon: isFavorite == true
                           ? const Icon(Icons.favorite_rounded)
@@ -124,7 +127,8 @@ class _ProductItemState extends State<ProductItem> {
                   GestureDetector(
                     onTap: () {
                       // add to cart
-                      ProductTabCubit.get(context).addToCart(widget.productEntity.id??'');
+                      ProductTabCubit.get(context)
+                          .addToCart(widget.productEntity.id ?? '');
                     },
                     child: Image.asset(
                       AppImages.add,

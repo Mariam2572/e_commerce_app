@@ -1,6 +1,5 @@
 import 'package:e_commerce_app/domain/di.dart';
 import 'package:e_commerce_app/ui/home/tabs/product_list_tab/cubit/product_tab_cubit.dart';
-import 'package:e_commerce_app/ui/home/product_details/product_details.dart';
 import 'package:e_commerce_app/ui/home/tabs/product_list_tab/widget/product_item.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
@@ -10,16 +9,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/app_images.dart';
 import '../../cart/card_screen.dart';
 
-class ProductListTab extends StatelessWidget {
+class ProductListTab extends StatefulWidget {
+  @override
+  State<ProductListTab> createState() => _ProductListTabState();
+}
+
+class _ProductListTabState extends State<ProductListTab> {
   ProductTabCubit cubit = ProductTabCubit(
+    addToWishListUseCase: injectAddToWishListUseCase(),
       getAllProductUseCase: injectGetAllProductUseCase(),
       addCartUseCase: injectAddCartUseCase());
+  
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductTabCubit>(
       create: (context) => cubit..getAllProducts(),
       child: BlocBuilder<ProductTabCubit, ProductTabState>(
-        // bloc: cubit..getAllProducts(),
         builder: (context, state) {
           return SafeArea(
             child: Column(
@@ -33,7 +39,9 @@ class ProductListTab extends StatelessWidget {
                         Navigator.of(context).pushNamed(CardScreen.routeName);
                       },
                       child: Badge(
-                        label: Text(cubit.numOfCartItem.toString(),),
+                        label: Text(
+                          cubit.numOfCartItem.toString(),
+                        ),
                         child: Image.asset(
                           AppImages.iconShopping,
                           width: 30,

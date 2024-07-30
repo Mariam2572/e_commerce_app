@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,7 +5,9 @@ import '../../../utils/app_color.dart';
 
 class ProductCount extends StatelessWidget {
   String count;
-   ProductCount({super.key , required this.count});
+  void Function()? addOnPressed;
+  void Function()? minusOnPressed;
+   ProductCount({super.key ,required this.addOnPressed,required this.minusOnPressed ,required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,8 @@ class ProductCount extends StatelessWidget {
         children: [
           IconButton(
             padding: EdgeInsets.zero,
-            onPressed: () {},
-            icon: Icon(
+            onPressed: minusOnPressed,
+            icon: const Icon(
               Icons.remove_circle_outline_rounded,
               color: AppColors.whiteColor,
               // size: 28.sp,
@@ -35,8 +36,8 @@ class ProductCount extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,),
           IconButton(
             padding: EdgeInsets.zero,
-            onPressed: () {},
-            icon: Icon(
+            onPressed: addOnPressed,
+            icon: const Icon(
               Icons.add_circle_outline_rounded,
               color: AppColors.whiteColor,
               // size: 28.sp,

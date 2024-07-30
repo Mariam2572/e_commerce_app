@@ -9,6 +9,7 @@ class ApiEndpoint {
   static const String brandsEndPoint = 'api/v1/brands';
   static const String productsEndPoint = '/api/v1/products';
   static const String addToCartEndPoint = '/api/v1/cart';
+  static const String addToWishListEndPoint = '/api/v1/wishlist';
   
 
 }

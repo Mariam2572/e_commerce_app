@@ -12,4 +12,18 @@ CartRemoteDataSourceImpl({required this.apiManager});
  var either =await apiManager.getCart();
  return either.fold((l) => Left(l), (response) => Right(response));
   }
+  
+  @override
+  Future<Either<Failures, GetCartResponseEntity>> deleteItemFromCart(
+      String productId) async {
+      var either= await apiManager.deleteItemFromCart(productId);
+ return either.fold((l) => Left(l), (response) => Right(response));
+
+  }
+  
+  @override
+  Future<Either<Failures, GetCartResponseEntity>> updateCountInCart(int count,String productId) async {
+   var either= await apiManager.updateCountInCart(count,productId);
+   return either.fold((l) => Left(l), (response) => Right(response));
+  }
 }

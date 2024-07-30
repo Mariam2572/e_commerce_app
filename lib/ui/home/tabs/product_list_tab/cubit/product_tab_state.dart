@@ -25,3 +25,13 @@ AddCartResponseEntity addCartResponseEntity;
 AddToCartSuccess({required this.addCartResponseEntity});
 
 }
+final class AddToWishListLoading extends ProductTabState {}
+final class AddToWishListError extends ProductTabState {
+  Failures ? errorMessage;
+  AddToWishListError({this.errorMessage});
+}
+final class AddToWishListSuccess extends ProductTabState {
+WishListResponseEntity wishListResponseEntity;
+AddToWishListSuccess({required this.wishListResponseEntity});
+
+}
