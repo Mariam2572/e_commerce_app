@@ -1,12 +1,8 @@
-
 class CategoryOrBrandsResponseEntity {
   int? results;
   List<CategoryOrBrandsEntity>? data;
 
   CategoryOrBrandsResponseEntity({this.results, this.data});
-
-
-
 }
 
 class CategoryOrBrandsEntity {
@@ -14,10 +10,13 @@ class CategoryOrBrandsEntity {
   String? name;
   String? slug;
   String? image;
-  
 
-  CategoryOrBrandsEntity({this.id, this.name, this.slug, this.image, });
-
+  CategoryOrBrandsEntity({
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+  });
 }
 // for pagination
 
@@ -29,13 +28,13 @@ class Metadata {
   Metadata({this.currentPage, this.numberOfPages, this.limit});
 
   Metadata.fromJson(Map<String, dynamic> json) {
-    if(json["currentPage"] is int) {
+    if (json["currentPage"] is int) {
       currentPage = json["currentPage"];
     }
-    if(json["numberOfPages"] is int) {
+    if (json["numberOfPages"] is int) {
       numberOfPages = json["numberOfPages"];
     }
-    if(json["limit"] is int) {
+    if (json["limit"] is int) {
       limit = json["limit"];
     }
   }

@@ -9,11 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavoriteTab extends StatelessWidget {
+  WishListCubit cubit = WishListCubit(getWishListUseCase: injectGetWishListUseCase());
   FavoriteTab({super.key});
 
   @override
   Widget build(BuildContext context) {
-  
+    return BlocBuilder<WishListCubit, WishListState>(
+      bloc:cubit..getWishList() ,
+      builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             surfaceTintColor: Colors.transparent,
@@ -31,29 +34,32 @@ class FavoriteTab extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
-          body:Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return FavoriteWidget(
-                          // wishListResponseEntity: state.wishListResponseEntity,
-                        );
-                      },
-                      itemCount: 10,
-                    )),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20.w, vertical: 30.h),
-                      child: TotalPriceWidget(
-                        totalPrice: '1000',
-                      ),
-                    )
-                  ],
+          body: 
+           
+          state is WishListSuccess ?
+           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: ListView.builder(
+                    
+                itemBuilder: (context, index) {
+                  return FavoriteWidget(
+                      wishListDataEntity: state.wishListResponseEntity.data![index],
+                      );
+                },
+                itemCount: state.wishListResponseEntity.data!.length,
+              )),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+                child: TotalPriceWidget(
+                  totalPrice: '1000',
                 ),
-             
+              )
+            ],
+          ) :const Center(child: CircularProgressIndicator(color: AppColors.mainColor,),)
         );
+      },
+    );
   }
-  }
-
+}

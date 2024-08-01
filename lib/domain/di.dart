@@ -23,6 +23,7 @@ import 'package:e_commerce_app/domain/use_cases/home_tab_use_case.dart';
 import 'package:e_commerce_app/domain/use_cases/login_use_case.dart';
 import 'package:e_commerce_app/domain/use_cases/register_use_case.dart';
 import 'package:e_commerce_app/domain/use_cases/update_count_use_case.dart';
+import 'package:e_commerce_app/domain/use_cases/wish_list_use_case.dart';
 
 //todo: cubit => object useCase
 //todo: useCase => object repository
@@ -98,4 +99,10 @@ WishListRepositoryContract injectToWishListRepositoryContract(){
 }
 WishListDataSource injectWishListDataSource(){
   return WishListDataSourceImpl(apiManager: ApiManager.getInstance());
+}
+GetWishListUseCase injectGetWishListUseCase(){
+  return GetWishListUseCase(wishListRepositoryContract: injectToWishListRepositoryContract());
+}
+DeleteWishListUseCase injectDeleteWishListUseCase(){
+  return DeleteWishListUseCase(wishListRepositoryContract: injectToWishListRepositoryContract());
 }

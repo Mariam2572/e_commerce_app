@@ -13,6 +13,7 @@ class GetAllCategoriesUseCase {
     return homeTabRepositoryContract.getCategory();
   }
 }
+
 class GetAllBrandsUseCase {
   HomeRepositoryContract homeTabRepositoryContract;
   GetAllBrandsUseCase({
@@ -20,9 +21,10 @@ class GetAllBrandsUseCase {
   });
   Future<Either<Failures, CategoryOrBrandsResponseEntity>> invoke() {
     return homeTabRepositoryContract.getBrands();
-  } }
+  }
+}
 
-  class GetAllProductUseCase {
+class GetAllProductUseCase {
   HomeRepositoryContract homeTabRepositoryContract;
   GetAllProductUseCase({
     required this.homeTabRepositoryContract,

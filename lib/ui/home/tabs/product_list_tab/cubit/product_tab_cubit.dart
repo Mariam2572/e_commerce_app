@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/domain/entities/add_cart_respose_entity.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
-import 'package:e_commerce_app/domain/entities/wish_list_response_entity.dart';
+import 'package:e_commerce_app/domain/entities/add_to_wish_list_response_entity.dart';
 import 'package:e_commerce_app/domain/use_cases/add_cart_use_case.dart';
 import 'package:e_commerce_app/domain/use_cases/add_to_wish_list.dart';
 import 'package:e_commerce_app/domain/use_cases/home_tab_use_case.dart';
@@ -38,7 +38,6 @@ AddCartUseCase addCartUseCase;
     either.fold((l) => emit(AddToCartError(errorMessage: l)),
         (response) {
           numOfCartItem = response.numOfCartItems!.toInt();
-          print('Num of cart item : ${numOfCartItem}======== ');
           emit(AddToCartSuccess(addCartResponseEntity: response));
         });
   }
@@ -48,7 +47,6 @@ AddCartUseCase addCartUseCase;
     either.fold((l) => Left(emit(AddToWishListError(errorMessage: l))),
         (response) {
       emit(AddToWishListSuccess(wishListResponseEntity: response));
-      print("=======================Added Successfully $response");
     });
   }
 }

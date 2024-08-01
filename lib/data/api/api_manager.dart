@@ -10,6 +10,7 @@ import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.d
 import 'package:e_commerce_app/data/model/response/get_cart_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/register_response_dto.dart';
+import 'package:e_commerce_app/data/model/response/add_to_wish_list_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/wish_list_response_dto.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
 import 'package:e_commerce_app/ui/utils/shared_pref.dart';
@@ -233,7 +234,7 @@ class ApiManager {
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));
     }
   }
-Future<Either<Failures, WishListResponseDto>> addToWishList(
+Future<Either<Failures, AddToWishListResponseDto>> addToWishList(
       String productId) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
@@ -244,13 +245,36 @@ Future<Either<Failures, WishListResponseDto>> addToWishList(
       var response = await http.post(url,
           body: {'productId': productId}, headers: {'token': token.toString()});
       var addToWishListResponse =
-          WishListResponseDto.fromJson(jsonDecode(response.body));
+          AddToWishListResponseDto.fromJson(jsonDecode(response.body));
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Right(addToWishListResponse);
       } else if (response.statusCode == 401) {
         return Left(ServerError(errorMessage: addToWishListResponse.message!));
       } else {
         return Left(ServerError(errorMessage: addToWishListResponse.message!));
+      }
+    } else {
+      return Left(NetWorkError(errorMessage: 'No Internet Connection'));
+    }
+  }
+  Future<Either<Failures, WishListResponseDto>> getWishList(
+     ) async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      Uri url =
+          Uri.https(ApiConstant.baseUrl, ApiEndpoint.addToWishListEndPoint);
+      var token = SharedPreference.getData(key: 'token');
+      var response = await http.get(url,
+           headers: {'token': token.toString()});
+      var getWishListResponse =
+          WishListResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(getWishListResponse);
+      } else if (response.statusCode == 401) {
+        return Left(ServerError(errorMessage: getWishListResponse.message!));
+      } else {
+        return Left(ServerError(errorMessage: getWishListResponse.message!));
       }
     } else {
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));
