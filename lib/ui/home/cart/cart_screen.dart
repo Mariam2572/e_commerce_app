@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/domain/di.dart';
 import 'package:e_commerce_app/ui/home/cart/cubit/cart_cubit.dart';
-import 'package:e_commerce_app/ui/home/cart/widgets/card_item.dart';
+import 'package:e_commerce_app/ui/home/cart/widgets/cart_item.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/total_price_widget.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CardScreen extends StatelessWidget {
   static const String routeName = '/card_screen';
   CartCubit cubit = CartCubit(
-    updateCountUseCase: injectUpdateCountUseCase(),
+      updateCountUseCase: injectUpdateCountUseCase(),
       getCartUseCase: injectToCartUseCase(),
       deleteCartUseCase: injectDeleteCartUseCase());
 
@@ -20,14 +20,13 @@ class CardScreen extends StatelessWidget {
     return BlocProvider<CartCubit>(
       create: (context) => cubit..getCart(),
       child: BlocBuilder<CartCubit, CartCubitState>(
-
         builder: (context, state) {
           return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
                 iconTheme: const IconThemeData(color: AppColors.mainColor),
                 title: Text(
-                  'Card',
+                  'Cart',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),

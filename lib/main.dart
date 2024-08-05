@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/my_observer.dart';
 import 'package:e_commerce_app/ui/auth/login/login_screen.dart';
 import 'package:e_commerce_app/ui/auth/register/register_screen.dart';
-import 'package:e_commerce_app/ui/home/cart/card_screen.dart';
+import 'package:e_commerce_app/ui/home/cart/cart_screen.dart';
 import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
 import 'package:e_commerce_app/ui/home/product_details/product_details.dart';
 import 'package:e_commerce_app/ui/splash/splash_screen.dart';

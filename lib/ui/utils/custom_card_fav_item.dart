@@ -2,23 +2,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
 import 'package:e_commerce_app/ui/utils/app_color.dart';
+import 'package:e_commerce_app/ui/utils/app_images.dart';
 
 class CustomCardAndFavItem extends StatelessWidget {
-  Widget iconFavOrDel;
+  
   Widget countOrAddToCartIcon;
   String url;
   String title;
- 
+  
   String price;
   CustomCardAndFavItem({
-    required this.price,
-     required this.url, 
     Key? key,
-    required this.title,
-   
-    required this.iconFavOrDel,
     required this.countOrAddToCartIcon,
+    required this.url,
+    required this.title,
+  
+    required this.price,
   }) : super(key: key);
 
   @override
@@ -45,32 +47,32 @@ class CustomCardAndFavItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                     title,
-                     overflow: TextOverflow.ellipsis,
-                     maxLines: 2,
-                     
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                   title,
+                   overflow: TextOverflow.ellipsis,
+                   maxLines: 2,
+                   
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  iconFavOrDel
-                ],
+                ),
               ),
               SizedBox(
                 height: 10.h,
               )  ,
              
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text('EGP $price',
-                      style: Theme.of(context).textTheme.titleSmall),
-                  countOrAddToCartIcon
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text('EGP $price',
+                        style: Theme.of(context).textTheme.titleSmall),
+                    countOrAddToCartIcon
+                  ],
+                ),
               ),
             ],
           ),

@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/domain/di.dart';
-import 'package:e_commerce_app/ui/home/cart/card_screen.dart';
+import 'package:e_commerce_app/ui/home/cart/cart_screen.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/cubit/home_tab_cubit.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/widget/category.dart';
 import 'package:e_commerce_app/ui/home/tabs/home_tab/widget/search_field.dart';

@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../utils/app_images.dart';
-import '../../cart/card_screen.dart';
+import '../../cart/cart_screen.dart';
 
 class ProductListTab extends StatefulWidget {
   @override
@@ -39,6 +39,7 @@ class _ProductListTabState extends State<ProductListTab> {
                         Navigator.of(context).pushNamed(CardScreen.routeName);
                       },
                       child: Badge(
+                        isLabelVisible: true,
                         label: Text(
                           cubit.numOfCartItem.toString(),
                         ),

@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/domain/entities/add_cart_respose_entity.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
-import 'package:e_commerce_app/domain/entities/add_to_wish_list_response_entity.dart';
+import 'package:e_commerce_app/domain/entities/wish_list_response_entity.dart';
 import 'package:e_commerce_app/domain/use_cases/add_cart_use_case.dart';
 import 'package:e_commerce_app/domain/use_cases/add_to_wish_list.dart';
 import 'package:e_commerce_app/domain/use_cases/home_tab_use_case.dart';
@@ -22,6 +22,7 @@ AddCartUseCase addCartUseCase;
   static ProductTabCubit get(context) => BlocProvider.of(context);
   List<ProductEntity> productList = [];
   int numOfCartItem = 0;
+  bool isFavorite = false;
   Future<void> getAllProducts() async {
     emit(ProductTabLoading());
     var either = await getAllProductUseCase.invoke();
@@ -46,6 +47,7 @@ AddCartUseCase addCartUseCase;
     var either = await addToWishListUseCase.invoke(productId);
     either.fold((l) => Left(emit(AddToWishListError(errorMessage: l))),
         (response) {
+          
       emit(AddToWishListSuccess(wishListResponseEntity: response));
     });
   }

@@ -6,15 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:e_commerce_app/ui/utils/app_images.dart';
-
 import '../../../../utils/app_color.dart';
 
 class ProductItem extends StatefulWidget {
   ProductEntity productEntity;
-
   ProductItem({
     Key? key,
     required this.productEntity,

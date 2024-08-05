@@ -31,7 +31,7 @@ final class AddToWishListError extends ProductTabState {
   AddToWishListError({this.errorMessage});
 }
 final class AddToWishListSuccess extends ProductTabState {
-AddToWishListResponseEntity wishListResponseEntity;
+WishListResponseEntity wishListResponseEntity;
 AddToWishListSuccess({required this.wishListResponseEntity});
 
 }

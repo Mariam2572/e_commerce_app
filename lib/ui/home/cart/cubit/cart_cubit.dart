@@ -27,7 +27,7 @@ class CartCubit extends Cubit<CartCubitState> {
   }
 
   deleteItemFromCart(String productId) async {
-    emit(CartCubitLoading());
+    // emit(CartCubitLoading());
     var either = await deleteCartUseCase.invoke(productId);
     return either.fold((l) => emit(CartCubitError(errorMessage: l)),
         (response) => emit(CartCubitSuccess(getCartResponseEntity: response)));

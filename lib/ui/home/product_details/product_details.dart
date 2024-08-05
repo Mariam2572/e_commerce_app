@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
-import 'package:e_commerce_app/ui/home/cart/card_screen.dart';
+import 'package:e_commerce_app/ui/home/cart/cart_screen.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/add_to_card.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/product_count.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/read_more_widget.dart';

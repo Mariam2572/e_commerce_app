@@ -11,6 +11,10 @@ final class WishListError extends WishListState {
 }
 final class WishListSuccess extends WishListState {
 
-  WishListResponseEntity wishListResponseEntity;
+  GetWishListResponseEntity wishListResponseEntity;
   WishListSuccess( { required this.wishListResponseEntity});
+}
+final class DeleteFromWishListSuccess extends WishListState {
+  WishListResponseEntity wishListResponseEntity;
+  DeleteFromWishListSuccess( { required this.wishListResponseEntity});
 }
