@@ -23,8 +23,10 @@ class CardItem extends StatelessWidget {
       endActionPane:
           ActionPane(
             extentRatio: .25, 
-            motion: const ScrollMotion(),
-            dismissible: DismissiblePane(onDismissed: () {}),
+            motion: const StretchMotion(),
+            dismissible: DismissiblePane(onDismissed: () {
+              CartCubit.get(context).deleteItemFromCart(cartEntity.product?.id??'');
+            }),
            children: [
         SlidableAction(
           onPressed: (context) {

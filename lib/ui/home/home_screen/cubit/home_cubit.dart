@@ -14,7 +14,7 @@ class HomeCubit extends Cubit<HomeStates> {
       HomeTab( ),
        ProductListTab(),
        FavoriteTab(),
-      const ProfileTab(),
+       ProfileTab(),
     ];
     changBottomNavBar(int newIndex){
       emit(HomeInitial());

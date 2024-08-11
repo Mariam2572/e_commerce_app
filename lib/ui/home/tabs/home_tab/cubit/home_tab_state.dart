@@ -16,3 +16,11 @@ final class HomeTabSuccess extends HomeTabState {
   CategoryOrBrandsResponseEntity categoryOrBrandsResponseEntity;
   HomeTabSuccess({required this.categoryOrBrandsResponseEntity});
 }
+
+final class SearchError extends HomeTabState {}
+final class SearchSuccess extends HomeTabState {
+  List<ProductEntity> searchProductList;
+ 
+  SearchSuccess({required this.searchProductList});
+
+}

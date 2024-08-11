@@ -8,6 +8,7 @@ import 'package:e_commerce_app/data/model/response/ProductResponseDto.dart';
 import 'package:e_commerce_app/data/model/response/add_cart_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.dart';
 import 'package:e_commerce_app/data/model/response/get_cart_response_dto.dart';
+import 'package:e_commerce_app/data/model/response/get_user_info_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/register_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/wish_list_response_dto.dart';
@@ -41,7 +42,8 @@ class ApiManager {
           email: email,
           password: password,
           rePassword: rePassword,
-          phone: phone);
+          phone: phone
+          );
       var response = await http.post(url, body: registerRequest.toJson());
       var registerResponse =
           RegisterResponseDto.fromJson(jsonDecode(response.body));
@@ -188,7 +190,8 @@ class ApiManager {
     }
   }
 
-  Future<Either<Failures, GetCartResponseDto>> deleteItemFromCart(String productId) async {
+  Future<Either<Failures, GetCartResponseDto>> deleteItemFromCart(
+      String productId) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
@@ -210,19 +213,22 @@ class ApiManager {
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));
     }
   }
-  Future<Either<Failures,GetCartResponseDto>> updateCountInCart(int count,String productId) async {
+
+  Future<Either<Failures, GetCartResponseDto>> updateCountInCart(
+      int count, String productId) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       Uri url = Uri.https(
-          ApiConstant.baseUrl,"${ ApiEndpoint.addToCartEndPoint}/$productId");
+          ApiConstant.baseUrl, "${ApiEndpoint.addToCartEndPoint}/$productId");
       var token = SharedPreference.getData(key: 'token');
-      var response =
-      await http.put(url,
-      body: {'count': count.toString()},
-       headers: {'token': token.toString(),});
+      var response = await http.put(url, body: {
+        'count': count.toString()
+      }, headers: {
+        'token': token.toString(),
+      });
       var updateCountInCart =
-      GetCartResponseDto.fromJson(jsonDecode(response.body));
+          GetCartResponseDto.fromJson(jsonDecode(response.body));
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Right(updateCountInCart);
       } else if (response.statusCode == 401) {
@@ -234,7 +240,8 @@ class ApiManager {
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));
     }
   }
-Future<Either<Failures, WishListResponseDto>> addToWishList(
+
+  Future<Either<Failures, WishListResponseDto>> addToWishList(
       String productId) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
@@ -257,16 +264,15 @@ Future<Either<Failures, WishListResponseDto>> addToWishList(
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));
     }
   }
-  Future<Either<Failures, GetWishListResponseDto>> getWishList(
-     ) async {
+
+  Future<Either<Failures, GetWishListResponseDto>> getWishList() async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       Uri url =
           Uri.https(ApiConstant.baseUrl, ApiEndpoint.addToWishListEndPoint);
       var token = SharedPreference.getData(key: 'token');
-      var response = await http.get(url,
-           headers: {'token': token.toString()});
+      var response = await http.get(url, headers: {'token': token.toString()});
       var getWishListResponse =
           GetWishListResponseDto.fromJson(jsonDecode(response.body));
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -280,12 +286,14 @@ Future<Either<Failures, WishListResponseDto>> addToWishList(
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));
     }
   }
-Future<Either<Failures, WishListResponseDto>> deleteItemFromWishList(String productId) async {
+
+  Future<Either<Failures, WishListResponseDto>> deleteItemFromWishList(
+      String productId) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      Uri url = Uri.https(
-          ApiConstant.baseUrl, '${ApiEndpoint.addToWishListEndPoint}/$productId');
+      Uri url = Uri.https(ApiConstant.baseUrl,
+          '${ApiEndpoint.addToWishListEndPoint}/$productId');
       var token = SharedPreference.getData(key: 'token');
       var response =
           await http.delete(url, headers: {'token': token.toString()});
@@ -297,6 +305,26 @@ Future<Either<Failures, WishListResponseDto>> deleteItemFromWishList(String prod
         return Left(ServerError(errorMessage: deleteItemFromWishList.message!));
       } else {
         return Left(ServerError(errorMessage: deleteItemFromWishList.message!));
+      }
+    } else {
+      return Left(NetWorkError(errorMessage: 'No Internet Connection'));
+    }
+  }
+
+  Future<Either<Failures, GetUserInfoDto>> getUserInfo() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      Uri url = Uri.https(ApiConstant.baseUrl, ApiEndpoint.addressEndPoint);
+      var token = SharedPreference.getData(key: 'token');
+      var response = await http.get(url, headers: {'token': token.toString()});
+      var getUserInfo = GetUserInfoDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(getUserInfo);
+      } else if (response.statusCode == 401) {
+        return Left(ServerError(errorMessage: getUserInfo.message!));
+      } else {
+        return Left(ServerError(errorMessage: getUserInfo.message!));
       }
     } else {
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));

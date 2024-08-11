@@ -60,7 +60,8 @@ class FavoriteTab extends StatelessWidget {
                         Expanded(
                             child: ListView.builder(
                           itemBuilder: (context, index) {
-                            return FavoriteWidget(
+                            return 
+                             FavoriteWidget(
                               onPressed: (context) {
                                 cubit.deleteItemFromWishList(state
                                         .wishListResponseEntity
@@ -75,7 +76,7 @@ class FavoriteTab extends StatelessWidget {
                                         .data![index]
                                         .id ??
                                     '');
-                                WishListCubit.get(context).getWishList();
+                                cubit.getWishList();
                               },
                               wishListDataEntity:
                                   state.wishListResponseEntity.data![index],

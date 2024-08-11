@@ -8,30 +8,27 @@ import 'package:meta/meta.dart';
 part 'wish_list_state.dart';
 
 class WishListCubit extends Cubit<WishListState> {
-   WishListCubit({required this.getWishListUseCase, required this.deleteWishListUseCase}) : super(WishListInitial());
+  WishListCubit(
+      {required this.getWishListUseCase, required this.deleteWishListUseCase})
+      : super(WishListInitial());
   static WishListCubit get(context) => BlocProvider.of(context);
   GetWishListUseCase getWishListUseCase;
   DeleteWishListUseCase deleteWishListUseCase;
 
- 
   getWishList() async {
     emit(WishListLoading());
     var either = await getWishListUseCase.invoke();
     either.fold((l) => emit(WishListError(errorMessage: l.errorMessage)),
         (response) {
-     
       emit(WishListSuccess(wishListResponseEntity: response));
-      
     });
-   
   }
-   deleteItemFromWishList(String productId) async {
-   var either = await deleteWishListUseCase.invoke(productId);
-   either.fold((l) => emit(WishListError(errorMessage: l.errorMessage)), (r) {
-    print('Delete from wish list success');
-   emit(DeleteFromWishListSuccess(wishListResponseEntity: r));
-   });
-    
-      
-    }
+
+  deleteItemFromWishList(String productId) async {
+    var either = await deleteWishListUseCase.invoke(productId);
+    either.fold((l) => emit(WishListError(errorMessage: l.errorMessage)), (r) {
+      print('Delete from wish list success');
+      emit(DeleteFromWishListSuccess(wishListResponseEntity: r));
+    });
+  }
 }

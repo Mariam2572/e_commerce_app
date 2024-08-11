@@ -21,6 +21,8 @@ AddCartUseCase addCartUseCase;
       : super(ProductTabInitial());
   static ProductTabCubit get(context) => BlocProvider.of(context);
   List<ProductEntity> productList = [];
+ 
+  
   int numOfCartItem = 0;
   bool isFavorite = false;
   Future<void> getAllProducts() async {
@@ -28,6 +30,7 @@ AddCartUseCase addCartUseCase;
     var either = await getAllProductUseCase.invoke();
     either.fold((l) => emit(ProductTabError(errorMessage: l)), (r) {
       productList = r.data ?? [];
+     
       emit(
         ProductTabSuccess(productResponseEntity: r),
       );

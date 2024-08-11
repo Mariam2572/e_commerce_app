@@ -24,16 +24,27 @@ void Function(BuildContext)? onPressed;
   Widget build(BuildContext context) {
     return Slidable(
       key: UniqueKey(),
+      startActionPane: ActionPane(
+        motion: StretchMotion(),
+        children: [  SlidableAction(
+              onPressed:onPressed ,
+              backgroundColor: AppColors.redColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              icon: Icons.delete,
+              label: 'Delete',
+            )
+          ],
+      ),
       endActionPane: ActionPane(
-          extentRatio: .25,
-          motion: const ScrollMotion(),
+          // extentRatio: .25,
+          motion: const  StretchMotion(),
           dismissible: DismissiblePane(onDismissed: onDismissed),
           children: [
             SlidableAction(
               onPressed:onPressed ,
               backgroundColor: AppColors.redColor,
-              foregroundColor: AppColors.whiteColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              // foregroundColor: AppColors.whiteColor,
+              borderRadius: const BorderRadius.all(Radius.circular(25)),
               icon: Icons.delete,
               label: 'Delete',
             )
@@ -49,6 +60,3 @@ void Function(BuildContext)? onPressed;
     );
   }
 }
-//WishListCubit.get(context)
-                    // .deleteItemFromWishList(wishListDataEntity.id ?? '');
-                // WishListCubit.get(context).getWishList();
