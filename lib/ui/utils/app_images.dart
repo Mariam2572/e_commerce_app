@@ -11,13 +11,14 @@ class AppImages{
   static const String slider1 = 'assets/images/slider1.png';
   static const String slider2 = 'assets/images/slider2.png';
   static const String slider3 = 'assets/images/slider3.png';
-  static const String logoBlue = 'assets/images/logo_blue.png';
+  static const String logo = 'assets/images/logo.png';
   static const String test = 'assets/images/test.png';
   static const String add = 'assets/images/add.png';
   static const String delete = 'assets/images/delete 1.png';
   static const String favGroup = 'assets/images/Group 17.png';
   static const String iconShopping = 'assets/images/🦆 icon _shopping cart_.png';
   static const String iconCard = 'assets/images/cart (2) 1.png';
+  static const String arrow = 'assets/images/arrow (6) 1.png';
 
 
   

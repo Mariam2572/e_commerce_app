@@ -16,6 +16,7 @@ import 'package:e_commerce_app/data/model/response/get_wish_list_response_dto.da
 import 'package:e_commerce_app/domain/entities/failures.dart';
 import 'package:e_commerce_app/ui/utils/shared_pref.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 /*
 https://ecommerce.routemisr.com/api/v1/auth/signup 
@@ -29,6 +30,7 @@ class ApiManager {
     _instance ??= ApiManager._();
     return _instance!;
   }
+
 
   Future<Either<Failures, RegisterResponseDto>> register(String name,
       String email, String password, String rePassword, String phone) async {
@@ -67,7 +69,7 @@ class ApiManager {
   Future<Either<Failures, LoginResponseDto>> login(
       String email, String password) async {
     var connectivityResult =
-        await Connectivity().checkConnectivity(); // User defined class
+        await Connectivity().checkConnectivity(); 
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       Uri url = Uri.https(ApiConstant.baseUrl, ApiEndpoint.loginEndPoint);

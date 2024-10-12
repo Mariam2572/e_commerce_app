@@ -42,7 +42,7 @@ class HomeTabCubit extends Cubit<HomeTabState> {
       emit(SearchSuccess(
         searchProductList: allProductList
             .where((product) =>
-                product.title!.toLowerCase().contains(text.toLowerCase()))
+                product.title!.toLowerCase().contains(text))
             .toList(),
       ));
     }

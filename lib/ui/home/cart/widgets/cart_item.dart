@@ -2,7 +2,6 @@ import 'package:e_commerce_app/domain/entities/GetCartResponseEntity.dart';
 import 'package:e_commerce_app/ui/home/cart/cubit/cart_cubit.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/product_count.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
-import 'package:e_commerce_app/ui/utils/app_images.dart';
 import 'package:e_commerce_app/ui/utils/custom_card_fav_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +38,7 @@ CartCubit.get(context).deleteItemFromCart(cartEntity.product?.id??'');
              ),
           icon: Icons.delete,
           label: 'Delete',
+
         )
       ]),
       child:
@@ -61,6 +61,7 @@ CartCubit.get(context).deleteItemFromCart(cartEntity.product?.id??'');
         CartCubit.get(context).updateCountInCart(counter,cartEntity.product?.id??'');
       },
       ),
-    ));
+    ),
+    );
   }
 }

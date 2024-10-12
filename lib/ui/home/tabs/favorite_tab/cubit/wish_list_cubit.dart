@@ -16,7 +16,7 @@ class WishListCubit extends Cubit<WishListState> {
   DeleteWishListUseCase deleteWishListUseCase;
 
   getWishList() async {
-    emit(WishListLoading());
+    // emit(WishListLoading());
     var either = await getWishListUseCase.invoke();
     either.fold((l) => emit(WishListError(errorMessage: l.errorMessage)),
         (response) {

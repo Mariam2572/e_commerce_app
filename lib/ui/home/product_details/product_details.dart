@@ -1,13 +1,14 @@
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:e_commerce_app/ui/home/cart/cart_screen.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/add_to_card.dart';
-import 'package:e_commerce_app/ui/home/product_details/widgets/product_count.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/read_more_widget.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/sold_widget.dart';
+import 'package:e_commerce_app/ui/home/tabs/product_list_tab/cubit/product_tab_cubit.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/app_images.dart';
@@ -15,12 +16,12 @@ import 'widgets/rating_widget.dart';
 
 class ProductDetails extends StatelessWidget {
   static const String routeName = '/product_details';
-  
-   ProductDetails({super.key});
+
+  ProductDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
-var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
+    var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -52,7 +53,6 @@ var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
         padding: const EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
-           
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -70,23 +70,30 @@ var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
                     indicatorBackgroundColor: AppColors.whiteColor,
                     indicatorBottomPadding: 20.h,
                     autoPlayInterval: 3000,
-                    children: args.images!.map((url) => Image.network(url,
-                        fit: BoxFit.fill,
-                    
-                    )
-                    ).toList()),
-                    ),
-              
+                    children: args.images!
+                        .map((url) => Image.network(
+                              url,
+                              fit: BoxFit.fill,
+                            ))
+                        .toList()),
+              ),
               SizedBox(
                 height: 40.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    args.title??'',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppColors.darkBlue, fontWeight: FontWeight.w500),
+                  Expanded(
+                    child: Text(
+                      maxLines: 2,
+                      args.title ?? '',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(
+                              color: AppColors.darkBlue,
+                              fontWeight: FontWeight.w500),
+                    ),
                   ),
                   Text(
                     'EGP ${args.price}',
@@ -101,19 +108,18 @@ var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
                 height: 10.h,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               
                 children: [
-                   SoldWidget(sold: args.sold.toString(),),
-                   RatingWidget(rating: args.ratingsAverage.toString(),),
-                  SizedBox(
-                    width: 10.w,
+                  SoldWidget(
+                    sold: args.sold.toString(),
                   ),
-                   ProductCount(
-                    addOnPressed: () {
-                   
-                    },
-                    minusOnPressed: () {},
-                    count: '1',),
+                    SizedBox(
+                    width: 15.w,
+                  ),
+                  RatingWidget(
+                    rating: args.ratingsAverage.toString(),
+                  ),
+                
                 ],
               ),
               SizedBox(
@@ -129,9 +135,19 @@ var args = ModalRoute.of(context)!.settings.arguments as ProductEntity;
               SizedBox(
                 height: 20.h,
               ),
-           ReadMoreWidget(text: args.description??'',),
-          SizedBox(height: 150.h,),
-          AddTOCartWidget(totalPrice: args.price.toString(),)
+              ReadMoreWidget(
+                text: args.description ?? '',
+              ),
+              SizedBox(
+                height: 150.h,
+              ),
+              AddTOCartWidget(
+                onTap: () {
+                  ProductTabCubit.get(context).addToCart(args.id ?? '');
+                 
+                },
+                totalPrice: args.price.toString(),
+              )
             ],
           ),
         ),

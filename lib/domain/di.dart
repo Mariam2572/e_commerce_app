@@ -44,79 +44,116 @@ AuthRepositoryContract injectAuthRepository() {
 }
 
 AuthRemoteDataSource injectAuthRemoteDataSource() {
-  return AuthRemoteDataSourceImpl(apiManager: ApiManager.getInstance());
+  return AuthRemoteDataSourceImpl(
+    apiManager: ApiManager.getInstance(),
+  );
 }
 
 LoginUseCase injectLoginUseCase() {
-  return LoginUseCase(repositoryContract: injectAuthRepository());
+  return LoginUseCase(
+    repositoryContract: injectAuthRepository(),
+  );
 }
 
 GetAllCategoriesUseCase injectAllCategories() {
-  return GetAllCategoriesUseCase(homeTabRepositoryContract: injectToHomeTab());
+  return GetAllCategoriesUseCase(
+    homeTabRepositoryContract: injectToHomeTab(),
+  );
 }
 
 GetAllBrandsUseCase injectGetAllBrandsUseCase() {
-  return GetAllBrandsUseCase(homeTabRepositoryContract: injectToHomeTab());
+  return GetAllBrandsUseCase(
+    homeTabRepositoryContract: injectToHomeTab(),
+  );
 }
 
 GetAllProductUseCase injectGetAllProductUseCase() {
-  return GetAllProductUseCase(homeTabRepositoryContract: injectToHomeTab());
+  return GetAllProductUseCase(
+    homeTabRepositoryContract: injectToHomeTab(),
+  );
 }
 
 HomeRepositoryContract injectToHomeTab() {
   return HomeTabRepoImpl(
-      homeTabRemoteDataSource: injectToHomeTabRemoteDataSource());
+    homeTabRemoteDataSource: injectToHomeTabRemoteDataSource(),
+  );
 }
 
 HomeRemoteDataSource injectToHomeTabRemoteDataSource() {
-  return HomeTabRemoteDataSourceImpl(apiManager: ApiManager.getInstance());
+  return HomeTabRemoteDataSourceImpl(
+    apiManager: ApiManager.getInstance(),
+  );
 }
 
 AddCartUseCase injectAddCartUseCase() {
-  return AddCartUseCase(homeRepositoryContract: injectToHomeTab());
+  return AddCartUseCase(
+    homeRepositoryContract: injectToHomeTab(),
+  );
 }
 
 GetCartUseCase injectToCartUseCase() {
-  return GetCartUseCase(cartRepositoryContract: injectToCartRepository());
+  return GetCartUseCase(
+    cartRepositoryContract: injectToCartRepository(),
+  );
 }
 
 CartRemoteDataSource injectToCartRemoteDataSource() {
-  return CartRemoteDataSourceImpl(apiManager: ApiManager.getInstance());
+  return CartRemoteDataSourceImpl(
+    apiManager: ApiManager.getInstance(),
+  );
 }
 
 CartRepositoryContract injectToCartRepository() {
   return CartRepositoryImpl(
-      cartRemoteDataSource: injectToCartRemoteDataSource());
+    cartRemoteDataSource: injectToCartRemoteDataSource(),
+  );
 }
 
-DeleteCartUseCase injectDeleteCartUseCase() {
-  return DeleteCartUseCase(cartRepositoryContract: injectToCartRepository());
+DeleteCartItemUseCase injectDeleteCartUseCase() {
+  return DeleteCartItemUseCase(
+    cartRepositoryContract: injectToCartRepository(),
+  );
 }
 
 UpdateCountUseCase injectUpdateCountUseCase() {
-  return UpdateCountUseCase(cartRepositoryContract: injectToCartRepository());
+  return UpdateCountUseCase(
+    cartRepositoryContract: injectToCartRepository(),
+  );
 }
+
 AddToWishListUseCase injectAddToWishListUseCase() {
-  return AddToWishListUseCase(wishListRepositoryContract: injectToWishListRepositoryContract());
+  return AddToWishListUseCase(
+      wishListRepositoryContract: injectToWishListRepositoryContract());
 }
-WishListRepositoryContract injectToWishListRepositoryContract(){
+
+WishListRepositoryContract injectToWishListRepositoryContract() {
   return WishListRepositoryImpl(wishListDataSource: injectWishListDataSource());
 }
-WishListDataSource injectWishListDataSource(){
+
+WishListDataSource injectWishListDataSource() {
   return WishListDataSourceImpl(apiManager: ApiManager.getInstance());
 }
-GetWishListUseCase injectGetWishListUseCase(){
-  return GetWishListUseCase(wishListRepositoryContract: injectToWishListRepositoryContract());
+
+GetWishListUseCase injectGetWishListUseCase() {
+  return GetWishListUseCase(
+      wishListRepositoryContract: injectToWishListRepositoryContract());
 }
-DeleteWishListUseCase injectDeleteWishListUseCase(){
-  return DeleteWishListUseCase(wishListRepositoryContract: injectToWishListRepositoryContract());
+
+DeleteWishListUseCase injectDeleteWishListUseCase() {
+  return DeleteWishListUseCase(
+      wishListRepositoryContract: injectToWishListRepositoryContract());
 }
-GetUserInfoUseCase injectGetUserInfoUseCase(){
-  return GetUserInfoUseCase(userInfoRepositoryContract: injectToUserInfoRepositoryContract());
+
+GetUserInfoUseCase injectGetUserInfoUseCase() {
+  return GetUserInfoUseCase(
+      userInfoRepositoryContract: injectToUserInfoRepositoryContract());
 }
-UserInfoRepositoryContract injectToUserInfoRepositoryContract(){
-  return GetUserInfoRepositoryImpl(userInfoDataSourceContract: injectUserInfoDataSourceContract());
+
+UserInfoRepositoryContract injectToUserInfoRepositoryContract() {
+  return GetUserInfoRepositoryImpl(
+      userInfoDataSourceContract: injectUserInfoDataSourceContract());
 }
-UserInfoDataSourceContract injectUserInfoDataSourceContract(){
+
+UserInfoDataSourceContract injectUserInfoDataSourceContract() {
   return GetUserInfoDAtaSourceImpl();
 }

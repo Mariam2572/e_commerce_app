@@ -26,8 +26,11 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * .95,
+      width: MediaQuery.of(context).size.width * .98,
       child: CupertinoSearchTextField(
+        prefixInsets: EdgeInsets.only(left: 20.w),
+
+      
         onSuffixTap: widget.onSuffixTap,
         onTap: widget.onTap,
         controller:widget. controller,
@@ -38,7 +41,7 @@ class _SearchFieldState extends State<SearchField> {
         padding: EdgeInsets.only(top: 18.h, bottom: 18.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.r),
-            border: Border.all(color: AppColors.mainColor, width: 1),),
+            border: Border.all(color: AppColors.mainColor, width: 1.5.w),),
       ),
     );
   }

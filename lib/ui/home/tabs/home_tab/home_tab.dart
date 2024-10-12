@@ -39,121 +39,121 @@ class _HomeTabState extends State<HomeTab> {
         ..fetchAllProducts(),
       builder: (context, state) {
         return SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 15.h,
-                ),
-                Image.asset(AppImages.logoBlue),
-                SizedBox(
-                  height: 15.h,
-                ),
-                SearchField(
-                  onSuffixTap: () {
-                    isSearching = false;
-                    cubit.searchTextController.clear();
-                    setState(() {});
-                  },
-                  onTap: () {
-                    setState(() {
-                      isSearching = true;
-                    });
-                  },
-                  controller: cubit.searchTextController,
-                  onChanged: (searchText) {
-                    cubit.search(searchText);
-                  },
-                ),
-                SizedBox(height: 15.h),
-                isSearching &&
-                        cubit.searchTextController.text.isNotEmpty &&
-                        state is SearchSuccess
-                    ? Expanded(
-                        child: GridView.builder(
-                          itemCount: cubit.searchTextController.text.isEmpty
-                              ? cubit.allProductList.length
-                              : state.searchProductList.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 2 / 2.7,
-                            crossAxisSpacing: 16.w,
+          child: Scaffold(
+         
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  SizedBox(
+                    height: 25.h,
+                  ),
+                  
+                  SearchField(
+                    onSuffixTap: () {
+                      isSearching = false;
+                      cubit.searchTextController.clear();
+                      setState(() {});
+                    },
+                    onTap: () {
+                      setState(() {
+                        isSearching = true;
+                      });
+                    },
+                    controller: cubit.searchTextController,
+                    onChanged: (searchText) {
+                      cubit.search(searchText);
+                    },
+                  ),
+                  SizedBox(height: 15.h),
+                  isSearching &&
+                          cubit.searchTextController.text.isNotEmpty &&
+                          state is SearchSuccess
+                      ? Expanded(
+                          child: GridView.builder(
+                            itemCount: cubit.searchTextController.text.isEmpty
+                                ? cubit.allProductList.length
+                                : state.searchProductList.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 2 / 2.7,
+                              crossAxisSpacing: 16.w,
+                            ),
+                            itemBuilder: (context, index) {
+                              return ProductItem(
+                                productEntity: state.searchProductList[index],
+                              );
+                            },
                           ),
-                          itemBuilder: (context, index) {
-                            return ProductItem(
-                              productEntity: state.searchProductList[index],
-                            );
-                          },
-                        ),
-                      )
-                    : Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SliderImages(),
-                              SizedBox(height: 15.h),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Categories',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .copyWith(
-                                            color: AppColors.darkBlue,
-                                            fontWeight: FontWeight.w500),
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Text(
-                                      'view all',
+                        )
+                      : Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SliderImages(),
+                                SizedBox(height: 15.h),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Categories',
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleSmall!
+                                          .titleMedium!
                                           .copyWith(
-                                              fontWeight: FontWeight.w400),
+                                              color: AppColors.darkBlue,
+                                              fontWeight: FontWeight.w500),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 15.h),
-                              state is HomeTabLoading
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                        color: AppColors.mainColor,
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Text(
+                                        'view all',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w400),
                                       ),
-                                    )
-                                  : CategoryItem(
-                                      categoriesList: cubit.categoriesList),
-                              SizedBox(height: 15.h),
-                              Text(
-                                'Brands',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium!
-                                    .copyWith(
-                                        color: AppColors.darkBlue,
-                                        fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(height: 15.h),
-                              state is HomeTabLoading
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                        color: AppColors.mainColor,
-                                      ),
-                                    )
-                                  : Brands(brandsList: cubit.brandsLiesList),
-                            ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 15.h),
+                                state is HomeTabLoading
+                                    ? const Center(
+                                        child: CircularProgressIndicator(
+                                          color: AppColors.mainColor,
+                                        ),
+                                      )
+                                    : CategoryItem(
+                                        categoriesList: cubit.categoriesList),
+                                SizedBox(height: 15.h),
+                                Text(
+                                  'Brands',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium!
+                                      .copyWith(
+                                          color: AppColors.darkBlue,
+                                          fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 15.h),
+                                state is HomeTabLoading
+                                    ? const Center(
+                                        child: CircularProgressIndicator(
+                                          color: AppColors.mainColor,
+                                        ),
+                                      )
+                                    : Brands(brandsList: cubit.brandsLiesList),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-              ],
+                ],
+              ),
             ),
           ),
         );

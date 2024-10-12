@@ -15,14 +15,18 @@ ProductTabSuccess({required this.productResponseEntity});
 
 }
 
-final class AddToCartLoading extends ProductTabState {}
+final class AddToCartLoading extends ProductTabState {
+  String? productId;
+  AddToCartLoading({this.productId});
+}
 final class AddToCartError extends ProductTabState {
   Failures ? errorMessage;
   AddToCartError({this.errorMessage});
 }
 final class AddToCartSuccess extends ProductTabState {
 AddCartResponseEntity addCartResponseEntity;
-AddToCartSuccess({required this.addCartResponseEntity});
+String? productId;
+AddToCartSuccess({this.productId,required this.addCartResponseEntity});
 
 }
 final class AddToWishListLoading extends ProductTabState {}
@@ -32,6 +36,7 @@ final class AddToWishListError extends ProductTabState {
 }
 final class AddToWishListSuccess extends ProductTabState {
 WishListResponseEntity wishListResponseEntity;
-AddToWishListSuccess({required this.wishListResponseEntity});
+String? productId;
+AddToWishListSuccess({required this.wishListResponseEntity,this.productId});
 
 }

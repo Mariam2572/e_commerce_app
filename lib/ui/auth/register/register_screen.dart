@@ -2,6 +2,7 @@ import 'package:e_commerce_app/domain/di.dart';
 import 'package:e_commerce_app/ui/auth/register/cubit/register_cubit.dart';
 import 'package:e_commerce_app/ui/auth/register/cubit/states.dart';
 import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
+import 'package:e_commerce_app/ui/utils/app_images.dart';
 import 'package:e_commerce_app/ui/utils/custom_button.dart';
 import 'package:e_commerce_app/ui/utils/custom_text_field.dart';
 import 'package:e_commerce_app/ui/utils/dialog_utils.dart';
@@ -36,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(
               context: context,
-              message: state.authResultEntity.userEntity?.name ?? '',
+              message: 'Account created successfully',
               title: 'Success',
                 posActionName: 'Ok',
             posAction: () {
@@ -55,7 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: MediaQuery.of(context).size.height * .07,
               ),
               Center(
-                child: Image.asset('assets/images/logo.png'),
+                child: Image.asset(AppImages.logo),
               ),
               Form(
                 key: cubit.form,

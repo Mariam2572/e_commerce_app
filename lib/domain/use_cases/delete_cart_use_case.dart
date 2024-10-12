@@ -4,9 +4,9 @@ import 'package:e_commerce_app/domain/repository/repository/cart_repository.dart
 
 import '../entities/GetCartResponseEntity.dart';
 
-class DeleteCartUseCase{
+class DeleteCartItemUseCase{
   CartRepositoryContract cartRepositoryContract;
-  DeleteCartUseCase({required this.cartRepositoryContract});
+  DeleteCartItemUseCase({required this.cartRepositoryContract});
 Future<Either<Failures, GetCartResponseEntity>>  invoke(String productId){
    return cartRepositoryContract.deleteItemFromCart(productId);
   }

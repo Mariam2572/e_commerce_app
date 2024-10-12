@@ -1,10 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+import 'package:e_commerce_app/domain/di.dart';
 import 'package:e_commerce_app/ui/home/product_details/product_details.dart';
 import 'package:e_commerce_app/ui/home/product_details/widgets/rating_widget.dart';
 import 'package:e_commerce_app/ui/home/tabs/product_list_tab/cubit/product_tab_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:e_commerce_app/domain/entities/product_response_entity.dart';
 import 'package:e_commerce_app/ui/utils/app_images.dart';
@@ -71,22 +73,40 @@ class _ProductItemState extends State<ProductItem> {
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 15,
-                    child: IconButton(
-                      color: AppColors.mainColor,
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        isFavorite = !isFavorite;
-                        setState(() {
-                          ProductTabCubit.get(context)
-                              .addToWishList(widget.productEntity.id ?? '');
-                        });
-                      },
-                      icon: isFavorite == true
-                          ? const Icon(Icons.favorite_rounded)
-                          : const Icon(
-                              Icons.favorite_border_rounded,
-                            ),
-                    ),
+                    child: BlocListener<ProductTabCubit, ProductTabState>(
+                        bloc: ProductTabCubit(
+                            addCartUseCase: injectAddCartUseCase(),
+                            addToWishListUseCase: injectAddToWishListUseCase(),
+                            getAllProductUseCase: injectGetAllProductUseCase()),
+                        child: IconButton(
+                          color: AppColors.mainColor,
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            isFavorite = !isFavorite;
+                            setState(() {
+                              ProductTabCubit.get(context)
+                                  .addToWishList(widget.productEntity.id ?? '');
+                            });
+                          },
+                          icon: isFavorite == true
+                              ? const Icon(Icons.favorite_rounded)
+                              : const Icon(
+                                  Icons.favorite_border_rounded,
+                                ),
+                        ),
+                        listenWhen: (previous, current) =>
+                            current is AddToWishListSuccess,
+                        listener: (context, state) {
+                          if (state is AddToWishListSuccess &&
+                              state.productId == widget.productEntity.id) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Added to wish list!'),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          }
+                        }),
                   ),
                 )
               ],
@@ -121,17 +141,86 @@ class _ProductItemState extends State<ProductItem> {
                   RatingWidget(
                     rating: widget.productEntity.ratingsAverage.toString(),
                   ),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
-                      // add to cart
+                      
                       ProductTabCubit.get(context)
                           .addToCart(widget.productEntity.id ?? '');
                     },
-                    child: Image.asset(
-                      AppImages.add,
-                      height: 25,
+                    child: BlocConsumer<ProductTabCubit, ProductTabState>(
+                      listenWhen: (previous, current) =>
+                          current is AddToCartSuccess ||
+                          current is AddToCartError,
+                      listener: (context, state) {
+                        if (state is AddToCartSuccess &&
+                            state.productId == widget.productEntity.id) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.white, 
+                                  ),
+                                  SizedBox(
+                                      width:
+                                          10), 
+                                  Text(
+                                    'Added to cart!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              backgroundColor: Colors.green,
+                              behavior: SnackBarBehavior
+                                  .floating, 
+                              margin:
+                                  const EdgeInsets.all(16), 
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    10), 
+                              ),
+                              duration:
+                                  const Duration(seconds: 2), 
+                            ),
+                          );
+                        } else if (state is AddToCartError) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  'Failed to add to cart: ${state.errorMessage}'),
+                              backgroundColor: Colors.red,
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        }
+                      },
+                      buildWhen: (previous, current) =>
+                          current is AddToCartLoading ||
+                          current is AddToCartSuccess,
+                      builder: (context, state) {
+                        if (state is AddToCartLoading &&
+                            state.productId == widget.productEntity.id) {
+                          return const CircularProgressIndicator
+                              .adaptive(); 
+                        } else if (state is AddToCartSuccess &&
+                            state.productId == widget.productEntity.id) {
+                          return const Icon(Icons.check_circle,
+                          
+                              color: AppColors.mainColor,
+                              ); 
+                        }
+                        return Image.asset(
+                          AppImages.add,
+                          height: 25, 
+                        );
+                      },
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

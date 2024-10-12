@@ -22,7 +22,7 @@ class CategoryOrBrandItem extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          flex: 8,
+          flex: 9,
           child:
               CircleAvatar(
             backgroundImage: NetworkImage(url),

@@ -24,7 +24,7 @@ class SliderImages extends StatelessWidget {
       children: 
       slideImages
           .map((url) => Padding(
-                padding: const EdgeInsets.all(10),
+                padding:  EdgeInsets.symmetric(horizontal: 5.w,vertical: 10.h),
                 child: Image.asset(
                   url,
                   fit: BoxFit.fill,

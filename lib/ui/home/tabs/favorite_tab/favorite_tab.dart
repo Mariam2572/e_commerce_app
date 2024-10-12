@@ -58,7 +58,9 @@ class FavoriteTab extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                            child: ListView.builder(
+                            child:state.wishListResponseEntity.data!.isEmpty? 
+                            Image.asset('assets/images/empty_screen.png'):
+                             ListView.builder(
                           itemBuilder: (context, index) {
                             return 
                              FavoriteWidget(
@@ -90,7 +92,7 @@ class FavoriteTab extends StatelessWidget {
                       child: CircularProgressIndicator(
                         color: AppColors.mainColor,
                       ),
-                    ));
+                    ),);
         },
       ),
     );

@@ -5,7 +5,6 @@ import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../utils/app_images.dart';
 import '../../cart/cart_screen.dart';
 
@@ -19,8 +18,6 @@ class _ProductListTabState extends State<ProductListTab> {
     addToWishListUseCase: injectAddToWishListUseCase(),
       getAllProductUseCase: injectGetAllProductUseCase(),
       addCartUseCase: injectAddCartUseCase());
-  
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductTabCubit>(
@@ -47,11 +44,18 @@ class _ProductListTabState extends State<ProductListTab> {
                           AppImages.iconShopping,
                           width: 30,
                         ),
-                      )),
+                      ),
+                      ),
                 ),
                 SizedBox(height: 10.h),
                 Expanded(
-                  child: GridView.builder(
+                  child:state is ProductTabLoading
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                color: AppColors.mainColor,
+                              ),
+                              )
+                            :   GridView.builder(
                       itemCount: cubit.productList.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
@@ -59,15 +63,11 @@ class _ProductListTabState extends State<ProductListTab> {
                         crossAxisSpacing: 16.w,
                       ),
                       itemBuilder: (context, index) {
-                        return state is ProductTabLoading
-                            ? const Center(
-                                child: CircularProgressIndicator(
-                                color: AppColors.mainColor,
-                              ))
-                            : ProductItem(
+                        return
+                            ProductItem(
                                 productEntity: cubit.productList[index],
                               );
-                      }),
+                      },),
                 ),
               ],
             ),

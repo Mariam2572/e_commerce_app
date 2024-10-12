@@ -42,7 +42,7 @@ AddCartUseCase addCartUseCase;
     either.fold((l) => emit(AddToCartError(errorMessage: l)),
         (response) {
           numOfCartItem = response.numOfCartItems!.toInt();
-          emit(AddToCartSuccess(addCartResponseEntity: response));
+          emit(AddToCartSuccess(addCartResponseEntity: response,productId: productId));
         });
   }
   addToWishList(String productId) async {

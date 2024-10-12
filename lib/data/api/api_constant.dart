@@ -1,5 +1,6 @@
 class ApiConstant{
- static const String baseUrl = 'ecommerce.routemisr.com'; 
+ static const String baseUrl = 'ecommerce.routemisr.com';
+ static const String createPaymentIntentPath = 'https://api.stripe.com/v1/payment_intents'; 
 } 
 class ApiEndpoint {
   

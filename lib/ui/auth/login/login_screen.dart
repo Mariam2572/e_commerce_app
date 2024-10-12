@@ -2,6 +2,7 @@ import 'package:e_commerce_app/domain/di.dart';
 import 'package:e_commerce_app/ui/auth/login/cubit/login_cubit.dart';
 import 'package:e_commerce_app/ui/auth/register/register_screen.dart';
 import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
+import 'package:e_commerce_app/ui/utils/app_images.dart';
 import 'package:e_commerce_app/ui/utils/custom_button.dart';
 import 'package:e_commerce_app/ui/utils/custom_text_field.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(
             context: context,
-            message: state.authResultEntity.userEntity?.name ?? '',
+            message: 'Login successfully',
             
             title: 'Success',
             posActionName: 'Ok',
@@ -62,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .10,
                     ),
-                    Center(child: Image.asset('assets/images/logo.png')),
+                    Center(child: Image.asset(AppImages.logo)),
                     Padding(
                       padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*.2,left: MediaQuery.of(context).size.width*.05),
                       child: Text('Welcome back !',
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           .copyWith(color: AppColors.whiteColor,fontSize: 24)),
                     ), Padding(
                       padding: EdgeInsets.only(top: 8,bottom: 10,left: MediaQuery.of(context).size.width*.05),
-                      child: Text('Please sign in with your email ',
+                      child: const Text('Please sign in with your email ',
                           style:TextStyle(fontSize: 16,fontWeight: FontWeight.w200,color: AppColors.whiteColor),
                           ),
                     ),
@@ -101,8 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: 'Enter your password',
                         obscureText: cubit.isObscure,
                         suffixIcon: InkWell(
-                          child: cubit.isObscure ? Icon(Icons.visibility_off)
-                          :Icon(Icons.visibility),
+                          child: cubit.isObscure ? const Icon(Icons.visibility_off)
+                          :const Icon(Icons.visibility),
                           onTap: () {
                             if (cubit.isObscure) {
                               cubit.isObscure =false;
