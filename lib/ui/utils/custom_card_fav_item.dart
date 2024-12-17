@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import 'package:e_commerce_app/ui/home/product_details/widgets/rating_widget.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:e_commerce_app/ui/utils/app_images.dart';
 
@@ -12,14 +13,14 @@ class CustomCardAndFavItem extends StatelessWidget {
   Widget countOrAddToCartIcon;
   String url;
   String title;
-  
+  String ?rating;
   String price;
   CustomCardAndFavItem({
     Key? key,
     required this.countOrAddToCartIcon,
     required this.url,
     required this.title,
-  
+     this.rating,
     required this.price,
   }) : super(key: key);
 
@@ -44,28 +45,23 @@ class CustomCardAndFavItem extends StatelessWidget {
         ),
         
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
                   child: Text(
                    title,
-                   overflow: TextOverflow.ellipsis,
-                   maxLines: 2,
+                   overflow: TextOverflow.visible,
+                   maxLines: 3,
                    
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10.h,
-              )  ,
-             
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                
+               RatingWidget(rating: rating??'0.0'),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text('EGP $price',
@@ -73,8 +69,8 @@ class CustomCardAndFavItem extends StatelessWidget {
                     countOrAddToCartIcon
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         )
       ]),

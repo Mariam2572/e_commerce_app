@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,12 @@ class CategoryOrBrandItem extends StatelessWidget {
           flex: 9,
           child:
               CircleAvatar(
-            backgroundImage: NetworkImage(url),
-            foregroundImage: NetworkImage(url),
+            backgroundImage: CachedNetworkImageProvider(url,errorListener: (p0) {
+              
+            },),
+            foregroundImage:CachedNetworkImageProvider(url,errorListener: (p0) {
+             
+            },),
             radius: 40.r,
           ),
         ),

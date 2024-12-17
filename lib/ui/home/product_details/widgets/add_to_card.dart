@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:e_commerce_app/ui/home/tabs/product_list_tab/cubit/product_tab_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,9 @@ class AddTOCartWidget extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
        TotalPriceWidget(totalPrice: totalPrice,),
       GestureDetector(
-        onTap: () {},
+        onTap: () {
+        
+        },
         child: Container(
           
           padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
@@ -38,12 +41,14 @@ class AddTOCartWidget extends StatelessWidget {
                 SizedBox(width: 10.w),
                 Text('Add to cart', style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w500
-                ))
+                ),
+                )
               ],
             ),
           ),
         ),
       )
+    
     ]);
   }
 }

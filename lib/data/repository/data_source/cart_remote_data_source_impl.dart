@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/data/api/api_manager.dart';
+import 'package:e_commerce_app/data/model/response/clear_cart_response.dart';
 import 'package:e_commerce_app/domain/entities/GetCartResponseEntity.dart';
 import 'package:e_commerce_app/domain/entities/failures.dart';
 import 'package:e_commerce_app/domain/repository/data_source/cart_remote_data_source.dart';
@@ -25,5 +26,9 @@ CartRemoteDataSourceImpl({required this.apiManager});
   Future<Either<Failures, GetCartResponseEntity>> updateCountInCart(int count,String productId) async {
    var either= await apiManager.updateCountInCart(count,productId);
    return either.fold((l) => Left(l), (response) => Right(response));
+  }
+  Future<Either<Failures,ClearCartResponse>>clearCart() async {
+  var either = await  apiManager.clearCart();
+  return either.fold((l) => Left(l), (response) => Right(response));
   }
 }

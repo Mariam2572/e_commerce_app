@@ -31,8 +31,8 @@ class CardItem extends StatelessWidget {
           onPressed: (context) {
 CartCubit.get(context).deleteItemFromCart(cartEntity.product?.id??'');
           },
-          backgroundColor: AppColors.redColor,
-          foregroundColor: AppColors.whiteColor,
+          backgroundColor: Colors.transparent,
+          foregroundColor: AppColors.redColor,
           borderRadius: const BorderRadius.all(
             Radius.circular(10)
              ),
@@ -45,7 +45,7 @@ CartCubit.get(context).deleteItemFromCart(cartEntity.product?.id??'');
     
     CustomCardAndFavItem(
       price: cartEntity.price.toString(),
-     
+    rating: cartEntity.product?.ratingsAverage.toString(),
       title: cartEntity.product?.title??'',
       url: cartEntity.product?.imageCover??'',
     

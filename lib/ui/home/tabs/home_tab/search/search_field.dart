@@ -26,7 +26,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * .98,
+      width: 360.w,
       child: CupertinoSearchTextField(
         prefixInsets: EdgeInsets.only(left: 20.w),
 
@@ -38,7 +38,7 @@ class _SearchFieldState extends State<SearchField> {
         placeholder: 'What do you search for ?',
         itemColor: AppColors.mainColor,
         itemSize: 25.sp,
-        padding: EdgeInsets.only(top: 18.h, bottom: 18.h),
+        padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.r),
             border: Border.all(color: AppColors.mainColor, width: 1.5.w),),

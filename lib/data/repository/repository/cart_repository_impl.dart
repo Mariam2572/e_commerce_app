@@ -24,4 +24,7 @@ class CartRepositoryImpl implements CartRepositoryContract {
   Future<Either<Failures, GetCartResponseEntity>> updateCountInCart(int count,String productId) {
    return cartRemoteDataSource.updateCountInCart(count,productId);
   }
+
+
+  
 }

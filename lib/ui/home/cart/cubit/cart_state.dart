@@ -19,17 +19,20 @@ final class CartCubitSuccess extends CartStates {
   CartCubitSuccess({required this.getCartResponseEntity});
 }
 
-final class PaymentInitial extends CartStates {}
- 
-// final class MakingPayment extends CartStates {}
-
 final class PaymentMade extends CartStates {
-  //   GetCartResponseEntity getCartResponseEntity;
-
-  // PaymentMade({required this.getCartResponseEntity});
 }
 
 final class PaymentFailed extends CartStates {
   final String error;
   PaymentFailed(this.error);
+}
+
+final class ClearCartSuccess extends CartStates {
+  String ?message;
+  ClearCartSuccess({ this.message});
+}
+
+final class ClearCartFailed extends CartStates {  
+  String? errorMessage;
+  ClearCartFailed({this.errorMessage});
 }

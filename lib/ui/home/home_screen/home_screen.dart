@@ -9,10 +9,12 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 HomeCubit cubit = HomeCubit();
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeStates>(
+      
       bloc: cubit,
       builder: (context, state) {
         return Scaffold(

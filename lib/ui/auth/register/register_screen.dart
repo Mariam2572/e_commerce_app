@@ -1,4 +1,6 @@
 import 'package:e_commerce_app/domain/di.dart';
+import 'package:e_commerce_app/main.dart';
+import 'package:e_commerce_app/ui/auth/login/login_screen.dart';
 import 'package:e_commerce_app/ui/auth/register/cubit/register_cubit.dart';
 import 'package:e_commerce_app/ui/auth/register/cubit/states.dart';
 import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
@@ -10,6 +12,7 @@ import 'package:e_commerce_app/ui/utils/app_color.dart';
 import 'package:e_commerce_app/ui/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String routeName = 'Register';
@@ -53,7 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * .07,
+                height:20.h,
               ),
               Center(
                 child: Image.asset(AppImages.logo),
@@ -64,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .02,
+                      height:15.h,
                     ),
                     CustomText(text: 'Full Name'),
                     CustomTextFormField(
@@ -167,7 +170,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               CustomButton(
                 text: 'Create Account ',
                 onClick: () => cubit.register(),
-              )
+              ),
+              TextButton(
+                onPressed: () {
+                   Navigator.of(context)
+                      .pushReplacementNamed(LoginScreen.routeName);
+                },
+                child: CustomText(text: 'Already have an account?',))
             ],
           ),
         ),

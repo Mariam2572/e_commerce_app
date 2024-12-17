@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/domain/di.dart';
+import 'package:e_commerce_app/main.dart';
 import 'package:e_commerce_app/ui/auth/login/cubit/login_cubit.dart';
 import 'package:e_commerce_app/ui/auth/register/register_screen.dart';
 import 'package:e_commerce_app/ui/home/home_screen/home_screen.dart';
@@ -11,6 +12,7 @@ import 'package:e_commerce_app/ui/utils/shared_pref.dart';
 import 'package:e_commerce_app/ui/utils/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'Login screen';
@@ -61,11 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .10,
+                      height:15.h,
                     ),
                     Center(child: Image.asset(AppImages.logo)),
                     Padding(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.width*.2,left: MediaQuery.of(context).size.width*.05),
+                      padding: EdgeInsets.only(top: 20.h,
+                      left: 20.h),
                       child: Text('Welcome back !',
                           style: Theme.of(context).textTheme.titleLarge!
                           .copyWith(color: AppColors.whiteColor,fontSize: 24)),

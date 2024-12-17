@@ -7,6 +7,7 @@ import 'package:e_commerce_app/data/model/request/register_request.dart';
 import 'package:e_commerce_app/data/model/response/ProductResponseDto.dart';
 import 'package:e_commerce_app/data/model/response/add_cart_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/categoryorbrandsrespose_dto.dart';
+import 'package:e_commerce_app/data/model/response/clear_cart_response.dart';
 import 'package:e_commerce_app/data/model/response/get_cart_response_dto.dart';
 import 'package:e_commerce_app/data/model/response/get_user_info_dto.dart';
 import 'package:e_commerce_app/data/model/response/login_response_dto.dart';
@@ -31,7 +32,6 @@ class ApiManager {
     return _instance!;
   }
 
-
   Future<Either<Failures, RegisterResponseDto>> register(String name,
       String email, String password, String rePassword, String phone) async {
     var connectivityResult =
@@ -44,8 +44,7 @@ class ApiManager {
           email: email,
           password: password,
           rePassword: rePassword,
-          phone: phone
-          );
+          phone: phone);
       var response = await http.post(url, body: registerRequest.toJson());
       var registerResponse =
           RegisterResponseDto.fromJson(jsonDecode(response.body));
@@ -68,8 +67,7 @@ class ApiManager {
 
   Future<Either<Failures, LoginResponseDto>> login(
       String email, String password) async {
-    var connectivityResult =
-        await Connectivity().checkConnectivity(); 
+    var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       Uri url = Uri.https(ApiConstant.baseUrl, ApiEndpoint.loginEndPoint);
@@ -327,6 +325,27 @@ class ApiManager {
         return Left(ServerError(errorMessage: getUserInfo.message!));
       } else {
         return Left(ServerError(errorMessage: getUserInfo.message!));
+      }
+    } else {
+      return Left(NetWorkError(errorMessage: 'No Internet Connection'));
+    }
+  }
+
+  Future<Either<Failures, ClearCartResponse>> clearCart() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      Uri url = Uri.https(ApiConstant.baseUrl, ApiEndpoint.clearCartEndPoint);
+      var token = SharedPreference.getData(key: 'token');
+      var response =
+          await http.delete(url, headers: {'token': token.toString()});
+      var clearCart = ClearCartResponse.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(clearCart);
+      } else if (response.statusCode == 401) {
+        return Left(ServerError(errorMessage: clearCart.message!));
+      } else {
+        return Left(ServerError(errorMessage: clearCart.message!));
       }
     } else {
       return Left(NetWorkError(errorMessage: 'No Internet Connection'));

@@ -12,6 +12,7 @@ class ApiEndpoint {
   static const String addToCartEndPoint = '/api/v1/cart';
   static const String addToWishListEndPoint = '/api/v1/wishlist';
   static const String addressEndPoint = '/api/v1/addresses';
+  static const String clearCartEndPoint = '/api/v1/cart';
   
 
 }
